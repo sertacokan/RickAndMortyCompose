@@ -16,9 +16,9 @@
 
 ### Features
    
-   [] View all characters in Rick&Morty
-   [] List characters by filter
-   [] Character search
-   [] List item animations
-   [] Paging implementation
+   [ ] View all characters in Rick&Morty
+   [ ] List characters by filter
+   [ ] Character search
+   [ ] List item animations
+   [ ] Paging implementation
    
