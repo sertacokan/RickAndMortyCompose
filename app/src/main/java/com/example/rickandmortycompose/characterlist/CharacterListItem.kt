@@ -20,6 +20,7 @@ import coil.compose.rememberImagePainter
 import com.example.rickandmortycompose.R
 import com.example.rickandmortycompose.network.response.Character
 import com.example.rickandmortycompose.samples.CharacterProvider
+import com.example.rickandmortycompose.ui.theme.RickAndMortyComposeTheme
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
@@ -31,8 +32,7 @@ fun CharacterListItem(
     Card(
         modifier = modifier
             .padding(4.dp)
-            .clickable { onCharacterItemClicked(character) },
-        shape = RoundedCornerShape(8.dp)
+            .clickable { onCharacterItemClicked(character) }
     ) {
         Row(modifier = Modifier.padding(8.dp)) {
             Column(modifier = Modifier.weight(2f)) {
@@ -66,6 +66,13 @@ fun CharacterListItem(
 
 @Preview
 @Composable
-fun CharacterListItemPreview(@PreviewParameter(CharacterProvider::class, limit = 3) character: Character) {
-    CharacterListItem(character = character, onCharacterItemClicked = {})
+fun CharacterListItemPreview(
+    @PreviewParameter(
+        CharacterProvider::class,
+        limit = 3
+    ) character: Character
+) {
+    RickAndMortyComposeTheme {
+        CharacterListItem(character = character, onCharacterItemClicked = {})
+    }
 }
