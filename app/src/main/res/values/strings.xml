@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">RickAndMortyCompose</string>
+    <string name="search_hint">Search Character</string>
+    <string name="chacter_image_content_description">Character Image</string>
+</resources>
