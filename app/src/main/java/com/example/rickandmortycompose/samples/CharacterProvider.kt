@@ -61,9 +61,9 @@ class CharacterProvider : PreviewParameterProvider<Character> {
         Character(
             id = 6,
             name = "Abadango Cluster Princess",
-            imageUrl = "\"https://rickandmortyapi.com/api/character/6",
+            imageUrl = "https://rickandmortyapi.com/api/character/avatar/6.jpeg",
             status = Status.Unknown,
-            species = "Human",
+            species = "Alien",
             type = "",
             gender = Gender.Male,
             url = "https://rickandmortyapi.com/api/character/6"
@@ -71,7 +71,7 @@ class CharacterProvider : PreviewParameterProvider<Character> {
         Character(
             id = 7,
             name = "Abradolf Lincler",
-            imageUrl = "https://rickandmortyapi.com/api/character/7",
+            imageUrl = "https://rickandmortyapi.com/api/character/avatar/7.jpeg",
             status = Status.Unknown,
             species = "Human",
             type = "Genetic experiment",
