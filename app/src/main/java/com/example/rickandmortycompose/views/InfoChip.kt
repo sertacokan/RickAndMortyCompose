@@ -21,17 +21,14 @@ fun InfoChip(
     modifier: Modifier = Modifier,
     infoText: String,
     chipBackgroundColor: Color = Color.White,
-    chipTextColor: Color = Color.Black,
     alignment: Alignment = Alignment.Center,
-    disabledChipBackgroundColor: Color = Color.Gray,
-    isDisabled: Boolean = false
+    chipTextColor: Color = Color.Black
 ) {
-    val backgroundColor = if (isDisabled) disabledChipBackgroundColor else chipBackgroundColor
     Surface(
         modifier = modifier.fillMaxWidth(),
         elevation = 8.dp,
         shape = RoundedCornerShape(8.dp),
-        color = backgroundColor,
+        color = chipBackgroundColor,
         contentColor = chipTextColor
     ) {
         Box {
@@ -48,10 +45,4 @@ fun InfoChip(
 @Composable
 fun InfoChipPreview(@PreviewParameter(CharacterProvider::class, limit = 1) character: Character) {
     InfoChip(infoText = character.species)
-}
-
-@Preview
-@Composable
-fun InfoChipDisabledPreview(@PreviewParameter(CharacterProvider::class, limit = 1) character: Character) {
-    InfoChip(infoText = character.species, isDisabled = true)
 }
