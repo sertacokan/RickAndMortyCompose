@@ -6,7 +6,6 @@ import com.example.rickandmortycompose.network.CharacterRepository
 import com.example.rickandmortycompose.network.response.Character
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class CharacterListViewModel(private val characterRepository: CharacterRepository) : ViewModel() {
@@ -18,9 +17,13 @@ class CharacterListViewModel(private val characterRepository: CharacterRepositor
         fetchCharacterList()
     }
 
+    fun searchCharacter(query: String) {
+
+    }
+
     private fun fetchCharacterList() {
         viewModelScope.launch {
-            _characterList.value = characterRepository.getCharacterList()
+            _characterList.value = characterRepository.getCharacterList(pageNumber = 1)
         }
     }
 }
