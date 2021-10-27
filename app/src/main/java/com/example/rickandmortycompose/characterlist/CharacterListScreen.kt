@@ -8,10 +8,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.rickandmortycompose.components.SearchBar
+import com.example.rickandmortycompose.network.response.Character
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun CharacterListScreen(characterListViewModel: CharacterListViewModel = getViewModel()) {
+fun CharacterListScreen(characterListViewModel: CharacterListViewModel = getViewModel(), onCharacterItemClicked: (Character) -> Unit) {
     val characters by characterListViewModel.characterList.collectAsState()
     val query by remember { mutableStateOf("") }
     Column(
@@ -22,7 +23,7 @@ fun CharacterListScreen(characterListViewModel: CharacterListViewModel = getView
         SearchBar(query = query, onQueryChanged = { query -> characterListViewModel.searchCharacter(query = query) })
         LazyColumn {
             items(characters) { character ->
-                CharacterListItem(character = character) {}
+                CharacterListItem(character = character, onCharacterItemClicked = onCharacterItemClicked)
             }
         }
     }
@@ -31,5 +32,7 @@ fun CharacterListScreen(characterListViewModel: CharacterListViewModel = getView
 @Preview
 @Composable
 fun CharacterListScreenPreview() {
-    CharacterListScreen()
+    CharacterListScreen {
+
+    }
 }
