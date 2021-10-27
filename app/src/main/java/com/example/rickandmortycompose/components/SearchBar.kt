@@ -29,7 +29,8 @@ fun SearchBar(
     cursorColor: Color = Color.White,
     hint: String = "Search",
     hintColor: Color = Color.White,
-    textStyle: TextStyle = TextStyle(fontSize = 17.sp)
+    textStyle: TextStyle = TextStyle(fontSize = 17.sp),
+    textColor: Color = cursorColor
 ) {
     TextField(
         value = query,
@@ -43,7 +44,6 @@ fun SearchBar(
         },
         modifier = modifier
             .fillMaxWidth()
-            .padding(8.dp)
             .background(backgroundColor, RoundedCornerShape(4.dp)),
         placeholder = {
             Text(text = hint, style = TextStyle(color = hintColor))
@@ -52,7 +52,8 @@ fun SearchBar(
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
             backgroundColor = Color.Transparent,
-            cursorColor = cursorColor
+            cursorColor = cursorColor,
+            textColor = textColor
         ),
         textStyle = textStyle,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
