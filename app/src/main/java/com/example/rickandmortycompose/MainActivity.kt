@@ -5,9 +5,14 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.example.rickandmortycompose.characterdetail.CharacterDetailScreen
+import com.example.rickandmortycompose.characterlist.CharacterListScreen
 import com.example.rickandmortycompose.ui.theme.RickAndMortyComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -17,22 +22,28 @@ class MainActivity : ComponentActivity() {
             RickAndMortyComposeTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    Greeting("Android")
+                    NavHostHolder()
                 }
             }
         }
     }
-}
 
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    RickAndMortyComposeTheme {
-        Greeting("Android")
+    @Composable
+    private fun NavHostHolder() {
+        val navController = rememberNavController()
+        NavHost(navController = navController, startDestination = "characterList") {
+            composable(route = "characterList") {
+                CharacterListScreen { character ->
+                    navController.navigate("characterDetail/${character.id}")
+                }
+            }
+            composable(
+                route = "characterDetail/{characterId}",
+                arguments = listOf(navArgument("characterId") { NavType.IntType })
+            ) { backStackEntry ->
+                val characterId = backStackEntry.arguments?.getInt("characterId") ?: 0
+                CharacterDetailScreen(characterId = characterId)
+            }
+        }
     }
 }
