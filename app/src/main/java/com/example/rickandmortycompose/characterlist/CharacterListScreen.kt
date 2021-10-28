@@ -14,13 +14,14 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 fun CharacterListScreen(characterListViewModel: CharacterListViewModel = getViewModel(), onCharacterItemClicked: (Character) -> Unit) {
     val characters by characterListViewModel.characterList.collectAsState()
-    val query by remember { mutableStateOf("") }
+    val queryTextState by characterListViewModel.queryText.collectAsState()
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
     ) {
-        SearchBar(query = query, onQueryChanged = { query -> characterListViewModel.searchCharacter(query = query) })
+        SearchBar(query = queryTextState, onQueryChanged = { query -> characterListViewModel.searchCharacter(query = query) })
         LazyColumn {
             items(characters) { character ->
                 CharacterListItem(character = character, onCharacterItemClicked = onCharacterItemClicked)
