@@ -13,12 +13,15 @@ class CharacterListViewModel(private val characterRepository: CharacterRepositor
     private val _characterList = MutableStateFlow(emptyList<Character>())
     val characterList: StateFlow<List<Character>> = _characterList
 
+    private val _queryText = MutableStateFlow("")
+    val queryText: StateFlow<String> = _queryText
+
     init {
         fetchCharacterList()
     }
 
     fun searchCharacter(query: String) {
-
+        _queryText.value = query
     }
 
     private fun fetchCharacterList() {
