@@ -5,6 +5,7 @@ import com.example.rickandmortycompose.network.CharacterRepository
 import io.ktor.client.*
 import io.ktor.client.engine.android.*
 import io.ktor.client.features.*
+import io.ktor.client.features.logging.*
 import io.ktor.client.request.*
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -17,6 +18,10 @@ val networkModule = module {
             }
             defaultRequest {
                 host = "https://rickandmortyapi.com/api/character"
+            }
+            install(Logging) {
+                logger = Logger.ANDROID
+                level = LogLevel.BODY
             }
         }
     }
