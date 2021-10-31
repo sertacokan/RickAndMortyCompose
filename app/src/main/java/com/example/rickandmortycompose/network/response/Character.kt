@@ -1,6 +1,6 @@
 package com.example.rickandmortycompose.network.response
 
-import com.squareup.moshi.Json
+import kotlinx.serialization.SerialName
 
 data class Character(
     val id: Int,
@@ -14,14 +14,14 @@ data class Character(
 ) {
     val isAlive: Boolean get() = status == Status.Alive
 
-    val isUnknown : Boolean  get() = status == Status.Unknown
+    val isUnknown: Boolean get() = status == Status.Unknown
 }
 
 enum class Status {
     Alive,
     Dead,
 
-    @Json(name = "unknown")
+    @SerialName("unknown")
     Unknown
 }
 
@@ -29,10 +29,10 @@ enum class Gender {
     Female,
     Male,
 
-    @Json(name = "genderless")
+    @SerialName("genderless")
     Genderless,
 
-
-    @Json(name = "unknown")
+    @SerialName("unknown")
     Unknown
 }
+
