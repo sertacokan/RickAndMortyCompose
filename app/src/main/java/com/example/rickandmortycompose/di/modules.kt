@@ -1,29 +1,28 @@
 package com.example.rickandmortycompose.di
 
+import androidx.paging.PagingConfig
 import com.example.rickandmortycompose.characterlist.CharacterListViewModel
 import com.example.rickandmortycompose.network.CharacterRepository
-import io.ktor.client.*
-import io.ktor.client.engine.android.*
-import io.ktor.client.features.*
-import io.ktor.client.features.logging.*
-import io.ktor.client.request.*
+import com.example.rickandmortycompose.network.CharacterService
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
+import retrofit2.Retrofit
 
+@OptIn(ExperimentalSerializationApi::class)
 val networkModule = module {
     single {
-        HttpClient(Android) {
-            engine {
-                connectTimeout = 60_000
-            }
-            defaultRequest {
-                host = "https://rickandmortyapi.com/api/character"
-            }
-            install(Logging) {
-                logger = Logger.ANDROID
-                level = LogLevel.BODY
-            }
-        }
+        val contentType = MediaType.get("application/json")
+        Retrofit.Builder()
+            .baseUrl("https://rickandmortyapi.com/api/")
+            .addConverterFactory(Json.asConverterFactory(contentType = contentType))
+            .build()
+    }
+    single {
+        get<Retrofit>().create(CharacterService::class.java)
     }
 }
 
