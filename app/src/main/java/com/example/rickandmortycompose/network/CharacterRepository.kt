@@ -1,11 +1,9 @@
 package com.example.rickandmortycompose.network
 
-import androidx.compose.ui.graphics.vector.addPathNodes
 import com.example.rickandmortycompose.network.response.Character
-import io.ktor.client.*
-import io.ktor.client.request.*
+import com.example.rickandmortycompose.network.response.CharacterResponse
 
-class CharacterRepository(private val httpClient: HttpClient) {
+class CharacterRepository(private val characterService: CharacterService) {
 
     suspend fun getCharacterList(): List<Character> {
         return httpClient.get {
