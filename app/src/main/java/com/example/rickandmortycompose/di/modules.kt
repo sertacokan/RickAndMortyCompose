@@ -8,6 +8,9 @@ import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFact
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -15,10 +18,21 @@ import retrofit2.Retrofit
 @OptIn(ExperimentalSerializationApi::class)
 val networkModule = module {
     single {
-        val contentType = MediaType.get("application/json")
+        HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+    }
+    single {
+        OkHttpClient.Builder()
+            .addInterceptor(get<HttpLoggingInterceptor>())
+            .build()
+    }
+    single {
+        val contentType = "application/json".toMediaType()
         Retrofit.Builder()
             .baseUrl("https://rickandmortyapi.com/api/")
             .addConverterFactory(Json.asConverterFactory(contentType = contentType))
+            .client(get())
             .build()
     }
     single {
@@ -28,7 +42,7 @@ val networkModule = module {
 
 val viewModelModule = module {
     viewModel {
-        CharacterListViewModel(characterRepository = get())
+        CharacterListViewModel(characterRepository = get(), pagingConfig = get())
     }
 }
 
@@ -37,5 +51,13 @@ val testModule = module {
 }
 
 val repositoryModule = module {
-    single { CharacterRepository(httpClient = get()) }
+    single {
+        CharacterRepository(characterService = get())
+    }
+}
+
+val pagingModule = module {
+    single {
+        PagingConfig(pageSize = 20, enablePlaceholders = false)
+    }
 }
