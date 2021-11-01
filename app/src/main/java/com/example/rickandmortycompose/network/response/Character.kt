@@ -1,7 +1,9 @@
 package com.example.rickandmortycompose.network.response
 
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Character(
     val id: Int,
     val name: String,
@@ -17,6 +19,7 @@ data class Character(
     val isUnknown: Boolean get() = status == Status.Unknown
 }
 
+@Serializable
 enum class Status {
     Alive,
     Dead,
@@ -25,6 +28,7 @@ enum class Status {
     Unknown
 }
 
+@Serializable
 enum class Gender {
     Female,
     Male,
