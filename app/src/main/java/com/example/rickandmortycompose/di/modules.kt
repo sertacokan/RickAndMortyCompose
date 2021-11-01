@@ -1,13 +1,11 @@
 package com.example.rickandmortycompose.di
 
-import androidx.paging.PagingConfig
 import com.example.rickandmortycompose.characterlist.CharacterListViewModel
 import com.example.rickandmortycompose.network.CharacterRepository
 import com.example.rickandmortycompose.network.CharacterService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -42,7 +40,7 @@ val networkModule = module {
 
 val viewModelModule = module {
     viewModel {
-        CharacterListViewModel(characterRepository = get(), pagingConfig = get())
+        CharacterListViewModel(characterRepository = get())
     }
 }
 
@@ -53,11 +51,5 @@ val testModule = module {
 val repositoryModule = module {
     single {
         CharacterRepository(characterService = get())
-    }
-}
-
-val pagingModule = module {
-    single {
-        PagingConfig(pageSize = 20, enablePlaceholders = false)
     }
 }

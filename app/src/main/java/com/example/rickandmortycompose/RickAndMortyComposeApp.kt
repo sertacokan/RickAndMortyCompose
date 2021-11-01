@@ -14,7 +14,7 @@ class RickAndMortyComposeApp : Application() {
         startKoin {
             androidContext(this@RickAndMortyComposeApp)
             androidLogger(Level.DEBUG)
-            modules(networkModule, viewModelModule, testModule, repositoryModule, pagingModule)
+            modules(networkModule, viewModelModule, testModule, repositoryModule)
         }
     }
 }
