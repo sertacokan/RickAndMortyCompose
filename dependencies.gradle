@@ -1,0 +1,65 @@
+def libraryVersions = [:]
+
+libraryVersions.androidxCore = '1.6.0'
+libraryVersions.appCompat = '1.3.1'
+libraryVersions.material = '1.4.0'
+libraryVersions.compose = '1.0.4'
+libraryVersions.composeNavigation = '2.4.0-alpha10'
+libraryVersions.composeActivity = '1.3.1'
+libraryVersions.lifecyle = '2.3.1'
+libraryVersions.retrofit = '2.9.0'
+libraryVersions.loggingInterceptor = '4.9.2'
+libraryVersions.kotlinXConverter = '0.8.0'
+libraryVersions.koin = '3.1.2'
+libraryVersions.coil = '1.4.0'
+libraryVersions.kotlinXSerializer = '1.3.0'
+libraryVersions.accompanist = '0.20.0'
+libraryVersions.paging3 = '3.0.1'
+libraryVersions.paging3Compose = '1.0.0-alpha14'
+
+def composeDependencies = [:]
+composeDependencies.ui = "androidx.compose.ui:ui:${libraryVersions.compose}"
+composeDependencies.material = "androidx.compose.material:material:${libraryVersions.compose}"
+composeDependencies.preview = "androidx.compose.ui:ui-tooling-preview:${libraryVersions.compose}"
+composeDependencies.activity = "androidx.activity:activity-compose:${libraryVersions.composeActivity}"
+composeDependencies.iconCore = "androidx.compose.material:material-icons-core:${libraryVersions.compose}"
+composeDependencies.iconExtended = "androidx.compose.material:material-icons-extended:${libraryVersions.compose}"
+composeDependencies.foundation = "androix.compose.foundation:foundation:${libraryVersions.compose}"
+composeDependencies.navigation = "androidx.navigation:navigation-compose:${libraryVersions.composeNavigation}"
+
+def lifecycleDependencies = [:]
+lifecycleDependencies.lifecycleKtx = "androidx.lifecycle:lifecycle-runtime-ktx:${libraryVersions.lifecycle}"
+
+def retrofitDependencies = [:]
+retrofitDependencies.retrofit = "com.squareup.retrofit2:retrofit:${libraryVersions.retrofit}"
+retrofitDependencies.logging = "com.squareup.okhttp3:logging-interceptor:${libraryVersions.loggingInterceptor}"
+retrofitDependencies.kotlinX = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:${libraryVersions.kotlinXConverter}"
+
+def koinDependencies = [:]
+koinDependencies.android = "io.insert-koin:koin-android:${libraryVersions.koin}"
+koinDependencies.compose = "io.insert-koin:koin-androidx-compose:${libraryVersions.koin}"
+koinDependencies.test = "io.insert-koin:koin-test:${libraryVersions.koin}"
+
+def coilDependencies = [:]
+coilDependencies.coil = "io.coil-kt:coil-compose:${libraryVersions.coil}"
+
+def kotlinXSerializationDependencies = [:]
+kotlinXSerializationDependencies.serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:${libraryVersions.kotlinXSerializer}"
+
+def accompanistDependencies = [:]
+accompanistDependencies.flowLayout = "com.google.accompanist:accompanist-flowlayout:${libraryVersions.accompanist}"
+accompanistDependencies.placeHolder = "com.google.accompanist:accompanist-placeholder:${libraryVersions.accompanist}"
+
+def paging3Dependencies = [:]
+paging3Dependencies.runtimeKtx = "androidx.paging:paging-runtime-ktx:${libraryVersions.paging3}"
+paging3Dependencies.compose = "androidx.paging:paging-compose:${libraryVersions.paging3Compose}"
+
+def libraries = [:]
+libraries.compose = composeDependencies
+libraries.lifecycle = lifecycleDependencies
+libraries.retrofit = retrofitDependencies
+libraries.koin = koinDependencies
+libraries.coil = coilDependencies
+libraries.kotlinX = kotlinXSerializationDependencies
+libraries.accompanist = accompanistDependencies
+libraries.paging3 = paging3Dependencies
