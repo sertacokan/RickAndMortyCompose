@@ -16,7 +16,7 @@ class CharacterDetailViewModel(private val characterRepository: CharacterReposit
     private fun fetchCharacterDetail(characterId: String) {
         viewModelScope.launch {
             _characterDetailFlow.value =
-                characterRepository.getCharacterInfo(characterId = characterId)
+                characterRepository.fetchCharacterInfo(characterId = characterId)
         }
     }
 }
