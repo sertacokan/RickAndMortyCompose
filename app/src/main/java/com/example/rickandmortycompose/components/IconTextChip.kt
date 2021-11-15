@@ -1,5 +1,6 @@
-package com.example.rickandmortycompose.views
+package com.example.rickandmortycompose.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
@@ -29,12 +30,19 @@ fun IconTextChip(
     modifier: Modifier = Modifier,
     infoText: String,
     propertyIcon: ImageVector = Icons.TwoTone.LocalHospital,
-    backgroundColor: Color = Color.White,
+    unselectedBackgroundColor: Color = Color.LightGray,
+    selectedBackgroundColor: Color = Color.White,
     propertyTextColor: Color = Color.Black,
-    titleTextSize: TextUnit = 12.sp
+    titleTextSize: TextUnit = 12.sp,
+    isSelected: Boolean = false,
+    textColor: Color = Color.DarkGray,
+    onSelected: (String) -> Unit = {}
 ) {
+    val backgroundColor = if (isSelected) selectedBackgroundColor else unselectedBackgroundColor
     Surface(
-        modifier = modifier.wrapContentSize(),
+        modifier = modifier
+            .wrapContentSize()
+            .clickable { onSelected(infoText) },
         elevation = 8.dp,
         shape = RoundedCornerShape(percent = 50),
         color = backgroundColor,
@@ -49,9 +57,13 @@ fun IconTextChip(
             Spacer(modifier = Modifier.width(2.dp))
             Text(
                 text = infoText,
-                style = TextStyle(fontSize = titleTextSize, fontStyle = FontStyle.Italic, fontWeight = FontWeight.Bold),
+                style = TextStyle(
+                    fontSize = titleTextSize,
+                    fontStyle = FontStyle.Italic,
+                    fontWeight = FontWeight.Bold
+                ),
                 modifier = innerComponentModifier,
-                color = Color.Gray
+                color = textColor
             )
         }
     }
@@ -59,9 +71,10 @@ fun IconTextChip(
 
 @Preview
 @Composable
-fun CharacterPropertyBannerPreview(@PreviewParameter(CharacterProvider::class, limit = 1) character: Character) {
+fun IconTextPreview(@PreviewParameter(CharacterProvider::class, limit = 1) character: Character) {
     IconTextChip(
         infoText = character.species,
-        propertyIcon = Icons.Outlined.LocalHospital
+        propertyIcon = Icons.Outlined.LocalHospital,
+        isSelected = true
     )
 }
