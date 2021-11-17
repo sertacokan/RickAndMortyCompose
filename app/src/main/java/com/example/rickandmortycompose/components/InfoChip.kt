@@ -1,5 +1,6 @@
 package com.example.rickandmortycompose.components
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -8,11 +9,14 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.LocalHospital
-import androidx.compose.material.icons.twotone.LocalHospital
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
@@ -26,39 +30,40 @@ import com.example.rickandmortycompose.network.response.Character
 import com.example.rickandmortycompose.samples.CharacterProvider
 
 @Composable
-fun IconTextChip(
+fun InfoChip(
     modifier: Modifier = Modifier,
-    infoText: String,
-    propertyIcon: ImageVector = Icons.TwoTone.LocalHospital,
+    text: String,
+    leadIcon: ImageVector? = null,
     unselectedBackgroundColor: Color = Color.LightGray,
     selectedBackgroundColor: Color = Color.White,
-    propertyTextColor: Color = Color.Black,
-    titleTextSize: TextUnit = 12.sp,
+    contentColor: Color = Color.Black,
+    textSize: TextUnit = 12.sp,
     isSelected: Boolean = false,
     textColor: Color = Color.DarkGray,
-    onSelected: (String) -> Unit = {}
+    backgroundShape: Shape = RoundedCornerShape(percent = 50),
+    onSelectionChange: (String) -> Unit = { }
 ) {
-    val backgroundColor = if (isSelected) selectedBackgroundColor else unselectedBackgroundColor
+    val backgroundColor by animateColorAsState(targetValue = if (isSelected) selectedBackgroundColor else unselectedBackgroundColor)
     Surface(
         modifier = modifier
             .wrapContentSize()
-            .clickable { onSelected(infoText) },
+            .clickable { onSelectionChange(text) },
         elevation = 8.dp,
-        shape = RoundedCornerShape(percent = 50),
+        shape = backgroundShape,
         color = backgroundColor,
-        contentColor = propertyTextColor
+        contentColor = contentColor
     ) {
         val innerComponentModifier = Modifier.padding(4.dp)
         Row(
             modifier = Modifier.padding(horizontal = 6.dp, vertical = 4.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(propertyIcon, contentDescription = null)
+            if (leadIcon != null) Icon(leadIcon, contentDescription = null)
             Spacer(modifier = Modifier.width(2.dp))
             Text(
-                text = infoText,
+                text = text,
                 style = TextStyle(
-                    fontSize = titleTextSize,
+                    fontSize = textSize,
                     fontStyle = FontStyle.Italic,
                     fontWeight = FontWeight.Bold
                 ),
@@ -71,10 +76,25 @@ fun IconTextChip(
 
 @Preview
 @Composable
-fun IconTextPreview(@PreviewParameter(CharacterProvider::class, limit = 1) character: Character) {
-    IconTextChip(
-        infoText = character.species,
-        propertyIcon = Icons.Outlined.LocalHospital,
-        isSelected = true
+fun InfoChipWithIconPreview(@PreviewParameter(CharacterProvider::class, limit = 1) character: Character) {
+    val isSelected = remember { mutableStateOf(false) }
+    InfoChip(
+        text = character.species,
+        leadIcon = Icons.Outlined.LocalHospital,
+        isSelected = isSelected.value,
+        onSelectionChange = { _ ->
+        }
+    )
+}
+
+@Preview
+@Composable
+fun InfoChipWithoutIconPreview(@PreviewParameter(CharacterProvider::class, limit = 1) character: Character) {
+    val isSelected = remember { mutableStateOf(false) }
+    InfoChip(
+        text = character.species,
+        isSelected = isSelected.value,
+        onSelectionChange = { _ ->
+        }
     )
 }
