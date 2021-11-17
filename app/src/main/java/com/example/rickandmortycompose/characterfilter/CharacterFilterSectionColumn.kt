@@ -16,20 +16,19 @@ import com.example.rickandmortycompose.components.FilterSection
 fun CharacterFilterSectionColumn(
     modifier: Modifier = Modifier,
     sections: List<FilterSection> = listOf(
-        FilterSection(R.string.character_gender_title, listOf("female", "male", "genderless", "unknown")),
-        FilterSection(R.string.character_status_title, listOf("alive", "dead", "unknown"))
+        FilterSection(R.string.character_gender_title, listOf("Female", "Male", "Genderless", "Unknown"), "Unknown"),
+        FilterSection(R.string.character_status_title, listOf("Alive", "Dead", "Unknown"), "Alive")
     ),
     onSectionChipChange: (String) -> Unit,
 ) {
     Column(modifier = modifier) {
         sections.forEach { filterSection ->
             CharacterFilterSection(
-                sectionTitleRes = filterSection.sectionTitleRes,
-                sectionChips = filterSection.sectionChips,
+                filterSection = filterSection,
                 onSectionItemSelected = onSectionChipChange,
                 modifier = Modifier.fillMaxWidth()
             )
-            Spacer(modifier = Modifier.height(4.dp))
+            Spacer(modifier = Modifier.height(2.dp))
         }
     }
 }
@@ -39,8 +38,8 @@ fun CharacterFilterSectionColumn(
 fun CharacterFilterSectionColumnPreview() {
     CharacterFilterSectionColumn(
         sections = listOf(
-            FilterSection(R.string.character_gender_title, listOf("female", "male", "genderless", "unknown")),
-            FilterSection(R.string.character_status_title, listOf("alive", "dead", "unknown"))
+            FilterSection(R.string.character_gender_title, listOf("Female", "Male", "Genderless", "Unknown"), "Unknown"),
+            FilterSection(R.string.character_status_title, listOf("Alive", "Dead", "Unknown"), "Alive")
         ),
     ) {
 
