@@ -19,19 +19,19 @@ import com.google.accompanist.flowlayout.FlowRow
 @Composable
 fun CharacterFilterSection(
     modifier: Modifier = Modifier,
-    @StringRes sectionTitleRes: Int,
-    sectionChips: List<String>,
+    filterSection: FilterSection,
     onSectionItemSelected: (String) -> Unit
 ) {
     Column(modifier = modifier.padding(8.dp)) {
-        Text(text = stringResource(id = sectionTitleRes), fontWeight = FontWeight.Bold)
-        Spacer(modifier = Modifier.height(8.dp))
+        Text(text = stringResource(id = filterSection.sectionTitleRes), fontWeight = FontWeight.Bold)
+        Spacer(modifier = Modifier.height(16.dp))
         FlowRow(mainAxisSpacing = 8.dp) {
-            for (chipText in sectionChips) {
+            for (chipText in filterSection.sectionChips) {
                 InfoChip(
                     text = chipText,
                     onSelectionChange = onSectionItemSelected,
-                    backgroundShape = RoundedCornerShape(4.dp)
+                    backgroundShape = RoundedCornerShape(4.dp),
+                    isSelected = chipText == filterSection.selectedChip
                 )
             }
         }
@@ -40,15 +40,20 @@ fun CharacterFilterSection(
 
 data class FilterSection(
     @StringRes val sectionTitleRes: Int,
-    val sectionChips: List<String>
+    val sectionChips: List<String>,
+    val selectedChip: String? = null
 )
 
 @Preview
 @Composable
 fun CharacterFilterSectionPreview() {
     CharacterFilterSection(
-        sectionTitleRes = R.string.character_gender_title,
-        sectionChips = listOf("female", "male", "genderless", "unknown"),
-        onSectionItemSelected = {
-        })
+        filterSection = FilterSection(
+            sectionTitleRes = R.string.character_gender_title,
+            sectionChips = listOf("Female", "Male", "Genderless", "Unknown"),
+            selectedChip = "Genderless"
+        )
+    ) {
+
+    }
 }
