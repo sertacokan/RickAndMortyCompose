@@ -24,7 +24,8 @@ class CharacterDataSource(private val characterRepository: CharacterRepository, 
                 characterRepository.fetchCharacterListByName(name = query, pageNumber = pageNumber)
             }
             val nextPageNumber = if (characterResponse.next != null) pageNumber + 1 else null
-            LoadResult.Page(data = characterResponse.results, prevKey = null, nextKey = nextPageNumber)
+            val previousPageNumber = if (characterResponse.prev != null) pageNumber - 1 else null
+            LoadResult.Page(data = characterResponse.results, prevKey = previousPageNumber, nextKey = nextPageNumber)
         } catch (e: Exception) {
             LoadResult.Error(e)
         }
