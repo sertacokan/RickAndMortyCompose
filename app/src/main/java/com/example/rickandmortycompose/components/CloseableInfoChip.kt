@@ -9,6 +9,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
@@ -22,7 +23,7 @@ fun CloseableInfoChip(
     textSize: TextUnit = 12.sp,
     isSelected: Boolean = false,
     textColor: Color = Color.DarkGray,
-    backgroundShape: Shape = RoundedCornerShape(percent = 50),
+    backgroundShape: Shape = RoundedCornerShape(size = 4.dp),
     closeIcon: ImageVector = Icons.TwoTone.Close,
     onCloseClicked: (String) -> Unit = {},
     onSelectionChange: (String) -> Unit = {}
