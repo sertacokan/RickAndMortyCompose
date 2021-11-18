@@ -9,12 +9,16 @@ import com.example.rickandmortycompose.network.CharacterRepository
 import com.example.rickandmortycompose.paging.CharacterDataSource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.update
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class CharacterListViewModel(private val characterRepository: CharacterRepository) : ViewModel() {
 
     private val _queryText = MutableStateFlow("")
+    private val _filters = MutableStateFlow(mutableListOf<String>())
+     val filters: StateFlow<MutableList<String>> = _filters
 
     val characterListPagingData = _queryText
         .flatMapLatest { query ->
@@ -22,4 +26,18 @@ class CharacterListViewModel(private val characterRepository: CharacterRepositor
                 CharacterDataSource(characterRepository = characterRepository, query = query)
             }.flow.cachedIn(viewModelScope)
         }
+
+    fun addFilter(filter: String) {
+        _filters.update { filters ->
+            filters.add(filter)
+            filters
+        }
+    }
+
+    fun removeFilter(filter: String) {
+        _filters.update { filters ->
+            filters.remove(filter)
+            filters
+        }
+    }
 }
