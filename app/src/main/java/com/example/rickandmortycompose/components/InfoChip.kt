@@ -5,10 +5,12 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.LocalHospital
+import androidx.compose.material.icons.twotone.Close
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -41,7 +43,10 @@ fun InfoChip(
     isSelected: Boolean = false,
     textColor: Color = Color.DarkGray,
     backgroundShape: Shape = RoundedCornerShape(percent = 50),
-    onSelectionChange: (String) -> Unit = { }
+    isClosable: Boolean = false,
+    closeIcon: ImageVector = Icons.TwoTone.Close,
+    onCloseClicked: (String) -> Unit = {},
+    onSelectionChange: (String) -> Unit = {}
 ) {
     val backgroundColor by animateColorAsState(targetValue = if (isSelected) selectedBackgroundColor else unselectedBackgroundColor)
     Surface(
@@ -53,13 +58,11 @@ fun InfoChip(
         color = backgroundColor,
         contentColor = contentColor
     ) {
-        val innerComponentModifier = Modifier.padding(4.dp)
         Row(
             modifier = Modifier.padding(horizontal = 6.dp, vertical = 4.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             if (leadIcon != null) Icon(leadIcon, contentDescription = null)
-            Spacer(modifier = Modifier.width(2.dp))
             Text(
                 text = text,
                 style = TextStyle(
@@ -67,9 +70,20 @@ fun InfoChip(
                     fontStyle = FontStyle.Italic,
                     fontWeight = FontWeight.Bold
                 ),
-                modifier = innerComponentModifier,
+                modifier = Modifier.padding(4.dp),
                 color = textColor
             )
+
+            if (isClosable) {
+                Icon(
+                    imageVector = closeIcon,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(14.dp)
+                        .clickable { onCloseClicked(text) },
+                    tint = Color.Gray
+                )
+            }
         }
     }
 }
@@ -82,6 +96,20 @@ fun InfoChipWithIconPreview(@PreviewParameter(CharacterProvider::class, limit = 
         text = character.species,
         leadIcon = Icons.Outlined.LocalHospital,
         isSelected = isSelected.value,
+        onSelectionChange = { _ ->
+        }
+    )
+}
+
+@Preview
+@Composable
+fun ClosableInfoChipWithIconPreview(@PreviewParameter(CharacterProvider::class, limit = 1) character: Character) {
+    val isSelected = remember { mutableStateOf(false) }
+    InfoChip(
+        text = character.species,
+        leadIcon = Icons.Outlined.LocalHospital,
+        isSelected = isSelected.value,
+        isClosable = true,
         onSelectionChange = { _ ->
         }
     )
