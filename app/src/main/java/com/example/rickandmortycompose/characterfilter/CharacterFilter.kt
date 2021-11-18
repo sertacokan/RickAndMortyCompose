@@ -6,15 +6,18 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Card
+import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.FilterList
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.rickandmortycompose.components.CloseableInfoChip
+import com.example.rickandmortycompose.components.CloseableFilterChip
 import com.google.accompanist.flowlayout.FlowRow
 
 @OptIn(ExperimentalAnimationApi::class)
@@ -26,23 +29,25 @@ fun CharacterFilter(
     onChipSelected: (String) -> Unit = {},
     onChipClosed: (String) -> Unit = {}
 ) {
-    Column {
-        Row {
-            FlowRow(
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(2.dp),
-                mainAxisSpacing = 2.dp,
-                crossAxisSpacing = 2.dp
-            ) {
-                selectedFilters.forEach { filterText -> CloseableInfoChip(text = filterText, onCloseClicked = onChipClosed) }
+    Card {
+        Column {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                FlowRow(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(2.dp),
+                    mainAxisSpacing = 4.dp,
+                    crossAxisSpacing = 4.dp
+                ) {
+                    selectedFilters.forEach { filterText -> CloseableFilterChip(text = filterText, onCloseClicked = onChipClosed) }
+                }
+                IconButton(onClick = onFilterClicked) {
+                    Icon(imageVector = Icons.Outlined.FilterList, contentDescription = null)
+                }
             }
-            IconButton(onClick = onFilterClicked) {
-                Icon(imageVector = Icons.Outlined.FilterList, contentDescription = null)
+            AnimatedVisibility(visible = isExpanded) {
+                CharacterFilterSectionColumn(modifier = Modifier.fillMaxWidth(), onSectionChipChange = onChipSelected)
             }
-        }
-        AnimatedVisibility(visible = isExpanded) {
-            CharacterFilterSectionColumn(modifier = Modifier.fillMaxWidth(), onSectionChipChange = onChipSelected)
         }
     }
 }
@@ -51,9 +56,7 @@ fun CharacterFilter(
 @Composable
 fun CharacterFilterPreview() {
     var isExpanded by remember { mutableStateOf(false) }
-    val selectedChipList = remember {
-        mutableStateListOf<String>()
-    }
+    val selectedChipList = remember { mutableStateListOf<String>() }
 
     CharacterFilter(
         selectedFilters = selectedChipList,
