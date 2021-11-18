@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun CloseableInfoChip(
+fun CloseableFilterChip(
     modifier: Modifier = Modifier,
     text: String,
     leadIcon: ImageVector? = null,
