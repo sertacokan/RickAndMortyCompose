@@ -9,6 +9,7 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material.icons.outlined.LocalHospital
 import androidx.compose.material.icons.twotone.Close
 import androidx.compose.runtime.Composable
@@ -44,7 +45,7 @@ fun InfoChip(
     textColor: Color = Color.DarkGray,
     backgroundShape: Shape = RoundedCornerShape(percent = 50),
     isClosable: Boolean = false,
-    closeIcon: ImageVector = Icons.TwoTone.Close,
+    closeIcon: ImageVector = Icons.Outlined.Close,
     onCloseClicked: (String) -> Unit = {},
     onSelectionChange: (String) -> Unit = {}
 ) {
