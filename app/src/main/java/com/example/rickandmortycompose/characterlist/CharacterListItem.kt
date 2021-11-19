@@ -7,7 +7,6 @@ import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
@@ -20,10 +19,10 @@ import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import coil.transform.RoundedCornersTransformation
 import com.example.rickandmortycompose.R
+import com.example.rickandmortycompose.components.InfoChip
 import com.example.rickandmortycompose.network.response.Character
 import com.example.rickandmortycompose.samples.CharacterProvider
 import com.example.rickandmortycompose.ui.theme.RickAndMortyComposeTheme
-import com.example.rickandmortycompose.components.InfoChip
 import com.google.accompanist.flowlayout.FlowRow
 
 @OptIn(ExperimentalCoilApi::class)
@@ -37,8 +36,7 @@ fun CharacterListItem(
     Card(
         modifier = modifier
             .padding(top = 8.dp)
-            .clickable { onCharacterItemClicked(character) }
-            .clipToBounds(),
+            .clickable { onCharacterItemClicked(character) },
         backgroundColor = backgroundColor
     ) {
         Row(modifier = Modifier.padding(8.dp)) {
@@ -51,7 +49,7 @@ fun CharacterListItem(
                 FlowRow(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 4.dp),
+                        .padding(top = 8.dp),
                     crossAxisSpacing = 4.dp,
                     mainAxisSpacing = 4.dp
                 ) {
