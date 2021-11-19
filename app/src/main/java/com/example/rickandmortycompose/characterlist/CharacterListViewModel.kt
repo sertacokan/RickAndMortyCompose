@@ -12,12 +12,12 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class CharacterListViewModel(private val characterRepository: CharacterRepository) : ViewModel() {
+class CharacterListViewModel(private val characterRepository: CharacterRepository,private val pagingConfig: PagingConfig) : ViewModel() {
 
     private val _filters = MutableStateFlow(mutableListOf<String>())
     val filters: StateFlow<MutableList<String>> = _filters
 
-    val characterListPagingData = Pager(config = PagingConfig(pageSize = 20, enablePlaceholders = false), initialKey = 1) {
+    val characterListPagingData = Pager(config = pagingConfig, initialKey = 1) {
         CharacterDataSource(characterRepository = characterRepository)
     }.flow.cachedIn(viewModelScope)
 

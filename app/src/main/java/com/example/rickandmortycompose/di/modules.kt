@@ -1,5 +1,6 @@
 package com.example.rickandmortycompose.di
 
+import androidx.paging.PagingConfig
 import com.example.rickandmortycompose.characterlist.CharacterListViewModel
 import com.example.rickandmortycompose.network.CharacterRepository
 import com.example.rickandmortycompose.network.CharacterService
@@ -46,7 +47,7 @@ val networkModule = module {
 
 val viewModelModule = module {
     viewModel {
-        CharacterListViewModel(characterRepository = get())
+        CharacterListViewModel(characterRepository = get(), pagingConfig = get())
     }
 }
 
@@ -57,5 +58,11 @@ val testModule = module {
 val repositoryModule = module {
     single {
         CharacterRepository(characterService = get())
+    }
+}
+
+val pagingModule = module {
+    single {
+        PagingConfig(pageSize = 20, enablePlaceholders = false)
     }
 }
