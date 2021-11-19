@@ -23,13 +23,14 @@ import com.google.accompanist.flowlayout.FlowRow
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun CharacterFilter(
+    modifier: Modifier = Modifier,
     selectedFilters: List<String> = emptyList(),
     isExpanded: Boolean = false,
     onFilterClicked: () -> Unit = {},
     onChipSelected: (String) -> Unit = {},
     onChipClosed: (String) -> Unit = {}
 ) {
-    Card {
+    Card(modifier = modifier.padding(vertical = 8.dp)) {
         Column {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 FlowRow(
