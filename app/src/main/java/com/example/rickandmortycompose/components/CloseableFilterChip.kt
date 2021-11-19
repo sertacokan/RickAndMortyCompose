@@ -1,6 +1,7 @@
 package com.example.rickandmortycompose.components
 
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.twotone.Close
 import androidx.compose.runtime.Composable
@@ -23,7 +24,7 @@ fun CloseableFilterChip(
     textSize: TextUnit = 12.sp,
     isSelected: Boolean = false,
     textColor: Color = Color.DarkGray,
-    backgroundShape: Shape = RoundedCornerShape(size = 4.dp),
+    backgroundShape: Shape = MaterialTheme.shapes.small,
     closeIcon: ImageVector = Icons.TwoTone.Close,
     onCloseClicked: (String) -> Unit = {},
     onSelectionChange: (String) -> Unit = {}
