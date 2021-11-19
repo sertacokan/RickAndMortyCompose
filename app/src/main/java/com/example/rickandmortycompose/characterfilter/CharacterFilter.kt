@@ -35,7 +35,7 @@ fun CharacterFilter(
                 FlowRow(
                     modifier = Modifier
                         .weight(1f)
-                        .padding(2.dp),
+                        .padding(4.dp),
                     mainAxisSpacing = 4.dp,
                     crossAxisSpacing = 4.dp
                 ) {
