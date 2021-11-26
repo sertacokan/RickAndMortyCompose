@@ -12,6 +12,8 @@ import com.example.rickandmortycompose.R
 import com.example.rickandmortycompose.components.CharacterFilterSection
 import com.example.rickandmortycompose.components.FilterSection
 
+// TODO : Change selected chip color
+// TODO : Single selection issue
 @Composable
 fun CharacterFilterSectionColumn(
     modifier: Modifier = Modifier,
