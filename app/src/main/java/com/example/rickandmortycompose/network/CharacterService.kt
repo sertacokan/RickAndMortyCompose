@@ -12,7 +12,7 @@ interface CharacterService {
     suspend fun fetchCharacterList(@Query("page") pageNumber: Int): CharacterResponse
 
     @GET("character/{characterId}")
-    suspend fun fetchCharacterInfoById(@Path("characterId") characterId: String): Character
+    suspend fun fetchCharacterInfoById(@Path("characterId") characterId: Int): Character
 
     @GET("character/")
     suspend fun fetchCharacterListByName(@Query("name") name: String, @Query("page") pageNumber: Int): CharacterResponse

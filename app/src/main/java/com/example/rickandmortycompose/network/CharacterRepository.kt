@@ -9,7 +9,7 @@ class CharacterRepository(private val characterService: CharacterService) {
         return characterService.fetchCharacterList(pageNumber = pageNumber)
     }
 
-    suspend fun fetchCharacterInfo(characterId: String): Character {
+    suspend fun fetchCharacterInfo(characterId: Int): Character {
         return characterService.fetchCharacterInfoById(characterId = characterId)
     }
 

@@ -4,26 +4,29 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.flowWithLifecycle
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
+import com.example.rickandmortycompose.R
 import com.example.rickandmortycompose.characterfilter.CharacterFilter
+import com.example.rickandmortycompose.characterfilter.rememberCharacterFilterState
+import com.example.rickandmortycompose.components.FilterSection
 import com.example.rickandmortycompose.network.response.Character
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun CharacterListScreen(characterListViewModel: CharacterListViewModel = getViewModel(), onCharacterItemClicked: (Character) -> Unit) {
-    val lifecycleOwner = LocalLifecycleOwner.current
-    val filterListFlow = characterListViewModel.filters
-    val filterListFlowLifecycleAware = remember(key1 = filterListFlow, key2 = lifecycleOwner) {
-        filterListFlow.flowWithLifecycle(lifecycle = lifecycleOwner.lifecycle)
-    }
+fun CharacterListScreen(
+    characterListViewModel: CharacterListViewModel = getViewModel(),
+    onCharacterItemClicked: (Character) -> Unit
+) {
+    val characterFilterState = rememberCharacterFilterState()
+    val lazyCharacterItems =
+        characterListViewModel.characterListPagingData.collectAsLazyPagingItems()
 
-    val lazyCharacterItems = characterListViewModel.characterListPagingData.collectAsLazyPagingItems()
-    val filterList by filterListFlowLifecycleAware.collectAsState(initial = emptyList())
-    var isExpanded by remember { mutableStateOf(false) }
+    val sectionList = listOf(
+        FilterSection(sectionTitleRes = R.string.character_gender_title, listOf("female","male","genderless","unknown")),
+        FilterSection(sectionTitleRes = R.string.character_status_title, listOf("alive","dead","unknown"))
+    )
 
     Column(
         modifier = Modifier
@@ -31,20 +34,25 @@ fun CharacterListScreen(characterListViewModel: CharacterListViewModel = getView
             .padding(8.dp)
     ) {
         CharacterFilter(
-            selectedFilters = filterList,
-            isExpanded = isExpanded,
-            onFilterClicked = { isExpanded = !isExpanded },
-            onChipSelected = { appliedFilter ->
-                characterListViewModel.addFilter(filter = appliedFilter)
+            filterState = characterFilterState,
+            filterSection = sectionList,
+            onFilterExpandClick = { isExpanded ->
+                characterFilterState.expanded.value = isExpanded
             },
-            onChipClosed = { closedFilter ->
-                characterListViewModel.removeFilter(closedFilter)
+            onFilterChipSelect = { appliedFilter ->
+               characterFilterState.addFilter(appliedFilter)
+            },
+            onFilterChipClose = { closedFilter ->
+               characterFilterState.removeFilter(closedFilter)
             }
         )
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             items(lazyCharacterItems) { character ->
                 val validCharacter = character ?: return@items
-                CharacterListItem(character = validCharacter, onCharacterItemClicked = onCharacterItemClicked)
+                CharacterListItem(
+                    character = validCharacter,
+                    onCharacterItemClicked = onCharacterItemClicked
+                )
             }
         }
     }

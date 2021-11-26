@@ -1,6 +1,5 @@
 package com.example.rickandmortycompose.characterlist
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
@@ -9,10 +8,15 @@ import androidx.paging.cachedIn
 import com.example.rickandmortycompose.network.CharacterRepository
 import com.example.rickandmortycompose.paging.CharacterDataSource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class CharacterListViewModel(private val characterRepository: CharacterRepository,private val pagingConfig: PagingConfig) : ViewModel() {
+class CharacterListViewModel(
+    private val characterRepository: CharacterRepository,
+    private val pagingConfig: PagingConfig
+) : ViewModel() {
 
     private val _filters = MutableStateFlow(mutableListOf<String>())
     val filters: StateFlow<MutableList<String>> = _filters

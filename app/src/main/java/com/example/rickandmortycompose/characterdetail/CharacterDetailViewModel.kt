@@ -13,7 +13,7 @@ class CharacterDetailViewModel(private val characterRepository: CharacterReposit
     private val _characterDetailFlow = MutableStateFlow<Character?>(null)
     val characterDetailFlow: StateFlow<Character?> = _characterDetailFlow
 
-    private fun fetchCharacterDetail(characterId: String) {
+    fun fetchCharacterDetail(characterId: Int) {
         viewModelScope.launch {
             _characterDetailFlow.value =
                 characterRepository.fetchCharacterInfo(characterId = characterId)
