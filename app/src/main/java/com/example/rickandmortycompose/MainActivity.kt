@@ -41,8 +41,11 @@ class MainActivity : ComponentActivity() {
                 route = "characterDetail/{characterId}",
                 arguments = listOf(navArgument("characterId") { NavType.IntType })
             ) { backStackEntry ->
-                val characterId = backStackEntry.arguments?.getInt("characterId") ?: return@composable
-                CharacterDetailScreen(characterId = characterId)
+                val characterId =
+                    backStackEntry.arguments?.getInt("characterId") ?: return@composable
+                CharacterDetailScreen(characterId = characterId) {
+                    navController.popBackStack()
+                }
             }
         }
     }

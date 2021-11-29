@@ -4,4 +4,5 @@
     <string name="character_image_content_description">Character Image</string>
     <string name="character_status_title">Status</string>
     <string name="character_gender_title">Gender</string>
+    <string name="character_detail_title">Character Detail</string>
 </resources>
