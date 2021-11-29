@@ -5,15 +5,19 @@ import com.example.rickandmortycompose.network.response.CharacterResponse
 
 class CharacterRepository(private val characterService: CharacterService) {
 
-    suspend fun fetchCharacterList(pageNumber: Int): CharacterResponse {
-        return characterService.fetchCharacterList(pageNumber = pageNumber)
+    suspend fun fetchCharacterList(
+        pageNumber: Int,
+        gender: String?,
+        status: String?
+    ): CharacterResponse {
+        return characterService.fetchCharacterList(
+            pageNumber = pageNumber,
+            gender = gender,
+            status = status
+        )
     }
 
     suspend fun fetchCharacterInfo(characterId: Int): Character {
         return characterService.fetchCharacterInfoById(characterId = characterId)
-    }
-
-    suspend fun fetchCharacterListByName(name: String, pageNumber: Int): CharacterResponse {
-        return characterService.fetchCharacterListByName(name = name, pageNumber = pageNumber)
     }
 }

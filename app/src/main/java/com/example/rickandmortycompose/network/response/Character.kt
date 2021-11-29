@@ -14,8 +14,6 @@ data class Character(
     val url: String
 ) {
     val isAlive: Boolean get() = status == Status.Alive
-
-    val isUnknown: Boolean get() = status == Status.Unknown
 }
 
 

@@ -9,11 +9,14 @@ import retrofit2.http.Query
 interface CharacterService {
 
     @GET("character/")
-    suspend fun fetchCharacterList(@Query("page") pageNumber: Int): CharacterResponse
+    suspend fun fetchCharacterList(
+        @Query("page") pageNumber: Int,
+        @Query("status") status: String?,
+        @Query("gender") gender: String?
+    ): CharacterResponse
 
     @GET("character/{characterId}")
-    suspend fun fetchCharacterInfoById(@Path("characterId") characterId: Int): Character
-
-    @GET("character/")
-    suspend fun fetchCharacterListByName(@Query("name") name: String, @Query("page") pageNumber: Int): CharacterResponse
+    suspend fun fetchCharacterInfoById(
+        @Path("characterId") characterId: Int
+    ): Character
 }

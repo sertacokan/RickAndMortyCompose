@@ -15,27 +15,10 @@ import kotlinx.coroutines.flow.update
 @OptIn(ExperimentalCoroutinesApi::class)
 class CharacterListViewModel(
     private val characterRepository: CharacterRepository,
-    private val pagingConfig: PagingConfig
+    pagingConfig: PagingConfig
 ) : ViewModel() {
-
-    private val _filters = MutableStateFlow(mutableListOf<String>())
-    val filters: StateFlow<MutableList<String>> = _filters
 
     val characterListPagingData = Pager(config = pagingConfig, initialKey = 1) {
         CharacterDataSource(characterRepository = characterRepository)
     }.flow.cachedIn(viewModelScope)
-
-    fun addFilter(filter: String) {
-        _filters.update { filters ->
-            filters.add(filter)
-            filters
-        }
-    }
-
-    fun removeFilter(filter: String) {
-        _filters.update { filters ->
-            filters.remove(filter)
-            filters
-        }
-    }
 }
