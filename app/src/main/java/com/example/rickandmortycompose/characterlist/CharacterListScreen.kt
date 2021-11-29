@@ -29,7 +29,7 @@ fun CharacterListScreen(
         CharacterFilter(
             filterState = characterFilterState,
             onFilterExpandClick = { isExpanded ->
-                characterFilterState.expanded.value = isExpanded
+                characterFilterState.isExpanded = isExpanded
             },
             onFilterChipSelect = { appliedFilter ->
                 characterFilterState.addFilter(appliedFilter)

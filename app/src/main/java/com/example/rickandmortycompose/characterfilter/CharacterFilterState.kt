@@ -1,29 +1,31 @@
 package com.example.rickandmortycompose.characterfilter
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import java.io.Serializable
 
-
+@Stable
 class CharacterFilterState(
     isExpanded: Boolean = false,
     sectionItems: Array<String> = emptyArray()
 ) : Serializable {
-    val selectedFilters = mutableStateListOf(*sectionItems)
-    val expanded = mutableStateOf(isExpanded)
+    private var _selectedFilters = mutableStateListOf(*sectionItems)
+    private var _isExpanded by mutableStateOf(isExpanded)
+
+    var isExpanded: Boolean
+        get() = this._isExpanded
+        set(value) {
+            this._isExpanded = value
+        }
+
+    val selectedFilter = _selectedFilters
 
     fun removeFilter(filter: String) {
-        selectedFilters.remove(filter)
+        _selectedFilters.remove(filter)
     }
 
     fun addFilter(filter: String) {
-        selectedFilters.add(filter)
-    }
-
-    fun updateExpand(isExpanded: Boolean) {
-        this.expanded.value = isExpanded
+        _selectedFilters.add(filter)
     }
 }
 

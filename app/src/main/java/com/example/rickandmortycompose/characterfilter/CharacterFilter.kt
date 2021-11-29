@@ -38,15 +38,15 @@ fun CharacterFilter(
                     mainAxisSpacing = 4.dp,
                     crossAxisSpacing = 4.dp
                 ) {
-                    filterState.selectedFilters.forEach { filterText ->
+                    filterState.selectedFilter.forEach { filterText ->
                         CloseableFilterChip(text = filterText, onCloseClicked = onFilterChipClose)
                     }
                 }
-                IconButton(onClick = { onFilterExpandClick(!filterState.expanded.value) }) {
+                IconButton(onClick = { onFilterExpandClick(!filterState.isExpanded) }) {
                     Icon(imageVector = Icons.Outlined.FilterList, contentDescription = null)
                 }
             }
-            AnimatedVisibility(visible = filterState.expanded.value) {
+            AnimatedVisibility(visible = filterState.isExpanded) {
                 CharacterFilterSectionColumn(
                     modifier = Modifier.fillMaxWidth(),
                     onSectionChipChange = onFilterChipSelect
@@ -62,9 +62,10 @@ fun CharacterFilterPreview() {
     val filterState = rememberCharacterFilterState()
     CharacterFilter(
         filterState = filterState,
-        onFilterExpandClick = { isExpanded -> filterState.updateExpand(isExpanded) },
-        onFilterChipSelect = { selectedChip -> filterState.addFilter(selectedChip) }
-    ) { closedChipText ->
-        filterState.removeFilter(closedChipText)
-    }
+        onFilterExpandClick = { isExpanded -> filterState.isExpanded = isExpanded },
+        onFilterChipSelect = { selectedChip -> filterState.addFilter(selectedChip) },
+        onFilterChipClose = { closedChipText ->
+            filterState.removeFilter(closedChipText)
+        }
+    )
 }
