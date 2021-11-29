@@ -17,14 +17,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.rickandmortycompose.components.CloseableFilterChip
-import com.example.rickandmortycompose.components.FilterSection
 import com.google.accompanist.flowlayout.FlowRow
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun CharacterFilter(
     modifier: Modifier = Modifier,
-    filterSection: List<FilterSection> = emptyList(),
     filterState: CharacterFilterState = rememberCharacterFilterState(),
     onFilterExpandClick: (isExpanded: Boolean) -> Unit = {},
     onFilterChipSelect: (String) -> Unit = {},
@@ -44,17 +42,14 @@ fun CharacterFilter(
                         CloseableFilterChip(text = filterText, onCloseClicked = onFilterChipClose)
                     }
                 }
-                IconButton(onClick = {
-                    onFilterExpandClick(!filterState.expanded.value)
-                }) {
+                IconButton(onClick = { onFilterExpandClick(!filterState.expanded.value) }) {
                     Icon(imageVector = Icons.Outlined.FilterList, contentDescription = null)
                 }
             }
             AnimatedVisibility(visible = filterState.expanded.value) {
                 CharacterFilterSectionColumn(
                     modifier = Modifier.fillMaxWidth(),
-                    onSectionChipChange = onFilterChipSelect,
-                    sections = filterSection
+                    onSectionChipChange = onFilterChipSelect
                 )
             }
         }
@@ -67,10 +62,9 @@ fun CharacterFilterPreview() {
     val filterState = rememberCharacterFilterState()
     CharacterFilter(
         filterState = filterState,
-        onFilterChipSelect = { selectedChip -> filterState.addFilter(selectedChip) },
         onFilterExpandClick = { isExpanded -> filterState.updateExpand(isExpanded) },
-        onFilterChipClose = { closedChipText ->
-            filterState.removeFilter(closedChipText)
-        }
-    )
+        onFilterChipSelect = { selectedChip -> filterState.addFilter(selectedChip) }
+    ) { closedChipText ->
+        filterState.removeFilter(closedChipText)
+    }
 }

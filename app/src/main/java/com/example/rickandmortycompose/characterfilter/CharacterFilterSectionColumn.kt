@@ -17,10 +17,7 @@ import com.example.rickandmortycompose.components.FilterSection
 @Composable
 fun CharacterFilterSectionColumn(
     modifier: Modifier = Modifier,
-    sections: List<FilterSection> = listOf(
-        FilterSection(R.string.character_gender_title, listOf("Female", "Male", "Genderless", "Unknown"), "Unknown"),
-        FilterSection(R.string.character_status_title, listOf("Alive", "Dead", "Unknown"), "Alive")
-    ),
+    sections: Array<FilterSection> = FilterSection.sections,
     onSectionChipChange: (String) -> Unit,
 ) {
     Column(modifier = modifier) {
@@ -38,12 +35,7 @@ fun CharacterFilterSectionColumn(
 @Preview
 @Composable
 fun CharacterFilterSectionColumnPreview() {
-    CharacterFilterSectionColumn(
-        sections = listOf(
-            FilterSection(R.string.character_gender_title, listOf("Female", "Male", "Genderless", "Unknown"), "Unknown"),
-            FilterSection(R.string.character_status_title, listOf("Alive", "Dead", "Unknown"), "Alive")
-        ),
-    ) {
+    CharacterFilterSectionColumn(sections = FilterSection.sections) {
 
     }
 }
