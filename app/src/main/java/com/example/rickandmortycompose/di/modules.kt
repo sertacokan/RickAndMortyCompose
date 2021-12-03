@@ -21,7 +21,6 @@ val networkModule = module {
             .addLast(KotlinJsonAdapterFactory())
             .build()
     }
-
     single {
         HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
@@ -50,8 +49,8 @@ val viewModelModule = module {
     viewModel {
         CharacterListViewModel(characterRepository = get(), pagingConfig = get())
     }
-    viewModel {
-        CharacterDetailViewModel(characterRepository = get())
+    viewModel { (characterId: Int) ->
+        CharacterDetailViewModel(characterRepository = get(), characterId = characterId)
     }
 }
 

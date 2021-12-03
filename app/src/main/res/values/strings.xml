@@ -1,8 +1,15 @@
 <resources>
     <string name="app_name">RickAndMortyCompose</string>
-    <string name="search_hint">Search Character</string>
-    <string name="character_image_content_description">Character Image</string>
+
+    <!-- Filter Section -->
     <string name="character_status_title">Status</string>
     <string name="character_gender_title">Gender</string>
+
+    <!-- Page Title -->
     <string name="character_detail_title">Character Detail</string>
+
+    <!-- Content Descriptions -->
+    <string name="character_image_content_description">Character Image</string>
+    <string name="character_favorite_button_content_description">Character Detail Favorite Button</string>
+    <string name="character_back_button_content_description">Character Detail Back Button</string>
 </resources>

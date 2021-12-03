@@ -1,22 +1,17 @@
 package com.example.rickandmortycompose.characterdetail
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.liveData
 import com.example.rickandmortycompose.network.CharacterRepository
 import com.example.rickandmortycompose.network.response.Character
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 
-class CharacterDetailViewModel(private val characterRepository: CharacterRepository) : ViewModel() {
+class CharacterDetailViewModel(
+    private val characterRepository: CharacterRepository,
+    private val characterId: Int
+) : ViewModel() {
 
-    private val _characterDetailFlow = MutableStateFlow<Character?>(null)
-    val characterDetailFlow: StateFlow<Character?> = _characterDetailFlow
-
-    fun fetchCharacterDetail(characterId: Int) {
-        viewModelScope.launch {
-            _characterDetailFlow.value =
-                characterRepository.fetchCharacterInfo(characterId = characterId)
-        }
+    val characterInfo = liveData<Character> {
+        characterRepository.fetchCharacterInfo(characterId = characterId)
     }
+
 }
