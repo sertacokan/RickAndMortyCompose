@@ -39,13 +39,19 @@ class MainActivity : ComponentActivity() {
             }
             composable(
                 route = "characterDetail/{characterId}",
-                arguments = listOf(navArgument("characterId") { NavType.IntType })
+                arguments = listOf(navArgument("characterId") { NavType.StringType })
             ) { backStackEntry ->
                 val characterId =
-                    backStackEntry.arguments?.getInt("characterId") ?: return@composable
-                CharacterDetailScreen(characterId = characterId) {
-                    navController.popBackStack()
-                }
+                    backStackEntry.arguments?.getString("characterId")?.toIntOrNull()
+                        ?: return@composable
+                CharacterDetailScreen(
+                    characterId = characterId,
+                    onBackPress = {
+                        navController.popBackStack()
+                    }, onFavoriteClick = { character ->
+                        println(character)
+                    }
+                )
             }
         }
     }
