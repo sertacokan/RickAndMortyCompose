@@ -1,0 +1,19 @@
+name: Environment and Setup
+on: pull_request
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Clone Repository
+        uses: actions/checkour@v2
+
+      - name: Setup JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+
+
+
+

@@ -1,0 +1,15 @@
+name: Checks
+on: pull_request
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Run Ktlint
+        run: ./gradlew ktlintFormat
+
+      - name: Run Detekt
+        run: ./gradlew detekt
+
+      - name: Run Unit Tests
+        run: ./gradlew test
