@@ -67,8 +67,8 @@ fun CharacterDetailScreen(
 private fun CharacterDetailFavoriteTopAppBar(
     characterInfo: Character?,
     isFavorite: Boolean = false,
-    onBackPress: () -> Unit,
-    onFavoriteClick: (Character?) -> Unit
+    onBackPress: () -> Unit = {},
+    onFavoriteClick: (Character?) -> Unit = {}
 ) {
     val favoriteIcon = if (isFavorite) Icons.Outlined.Favorite else Icons.Outlined.FavoriteBorder
 
@@ -77,9 +77,7 @@ private fun CharacterDetailFavoriteTopAppBar(
             IconButton(onClick = onBackPress) {
                 Icon(
                     imageVector = Icons.Outlined.ArrowBackIos,
-                    contentDescription = stringResource(
-                        id = R.string.character_back_button_content_description
-                    )
+                    contentDescription = stringResource(id = R.string.character_back_button_content_description)
                 )
             }
         },
@@ -87,9 +85,7 @@ private fun CharacterDetailFavoriteTopAppBar(
             IconButton(onClick = { onFavoriteClick(characterInfo) }) {
                 Icon(
                     imageVector = favoriteIcon,
-                    contentDescription = stringResource(
-                        id = R.string.character_favorite_button_content_description
-                    )
+                    contentDescription = stringResource(id = R.string.character_favorite_button_content_description)
                 )
             }
         },
@@ -102,17 +98,5 @@ private fun CharacterDetailFavoriteTopAppBar(
 @Preview
 @Composable
 fun CharacterDetailTopAppBarPreview() {
-
-    var isFavorite by remember {
-        mutableStateOf(false)
-    }
-
-    CharacterDetailFavoriteTopAppBar(
-        onBackPress = {},
-        onFavoriteClick = {
-            isFavorite = !isFavorite
-        },
-        characterInfo = null,
-        isFavorite = isFavorite
-    )
+    CharacterDetailFavoriteTopAppBar(characterInfo = null)
 }
