@@ -7,7 +7,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    needs: ['checks']
+    needs: [ 'checks', 'setup' ]
     steps:
       - name: Build
         run: ./gradlew assamble
