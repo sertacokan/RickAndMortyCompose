@@ -1,5 +1,8 @@
 name: Environment and Setup
-on: pull_request
+on:
+  push:
+    branches:
+      - master
 jobs:
   setup:
     runs-on: ubuntu-latest
