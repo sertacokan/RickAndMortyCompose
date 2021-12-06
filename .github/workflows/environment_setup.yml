@@ -9,7 +9,7 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: Clone Repository
-        uses: actions/checkour@v2
+        uses: actions/checkout@v2
 
       - name: Setup JDK
         uses: actions/setup-java@v2
