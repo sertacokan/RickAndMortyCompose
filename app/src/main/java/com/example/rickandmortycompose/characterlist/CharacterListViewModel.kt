@@ -8,9 +8,6 @@ import androidx.paging.cachedIn
 import com.example.rickandmortycompose.network.CharacterRepository
 import com.example.rickandmortycompose.paging.CharacterDataSource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class CharacterListViewModel(

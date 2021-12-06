@@ -13,5 +13,4 @@ class CharacterDetailViewModel(
     val characterInfo = liveData<Character> {
         characterRepository.fetchCharacterInfo(characterId = characterId)
     }
-
 }

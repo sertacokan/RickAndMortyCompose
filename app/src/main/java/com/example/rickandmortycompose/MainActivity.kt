@@ -49,11 +49,10 @@ class MainActivity : ComponentActivity() {
                     onBackPress = {
                         navController.popBackStack()
                     }, onFavoriteClick = { character ->
-                        println(character)
-                    }
+                    println(character)
+                }
                 )
             }
         }
     }
 }
-

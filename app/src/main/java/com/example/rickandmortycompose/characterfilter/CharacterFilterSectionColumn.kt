@@ -8,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.rickandmortycompose.R
 import com.example.rickandmortycompose.components.CharacterFilterSection
 import com.example.rickandmortycompose.components.FilterSection
 
@@ -36,6 +35,5 @@ fun CharacterFilterSectionColumn(
 @Composable
 fun CharacterFilterSectionColumnPreview() {
     CharacterFilterSectionColumn(sections = FilterSection.sections) {
-
     }
 }

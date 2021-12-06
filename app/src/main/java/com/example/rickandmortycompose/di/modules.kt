@@ -55,7 +55,6 @@ val viewModelModule = module {
 }
 
 val testModule = module {
-
 }
 
 val repositoryModule = module {

@@ -49,4 +49,3 @@ fun CharacterListScreen(
         }
     }
 }
-

@@ -48,11 +48,9 @@ enum class FilterSection(@StringRes val sectionTitleRes: Int, val sectionChips: 
     }
 }
 
-
 @Preview
 @Composable
 fun CharacterFilterSectionPreview(@PreviewParameter(FilterSectionProvider::class) filterSection: FilterSection) {
     CharacterFilterSection(filterSection = filterSection, modifier = Modifier.fillMaxWidth()) {
-
     }
 }

@@ -16,7 +16,6 @@ data class Character(
     val isAlive: Boolean get() = status == Status.Alive
 }
 
-
 enum class Status {
     Alive,
     Dead,
@@ -35,4 +34,3 @@ enum class Gender {
     @Json(name = "unknown")
     Unknown
 }
-
