@@ -1,4 +1,4 @@
-name: Environment and Setup
+name: Github Workflow
 on:
   push:
     branches:
