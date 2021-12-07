@@ -1,0 +1,45 @@
+name: Environment and Setup
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Clone Repository
+        uses: actions/checkout@v2
+
+      - name: Setup JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+  checks:
+    if: ${{ success() }} # returns true when none of the previous steps have failed or been cancelled.
+    needs: setup
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Run Ktlint
+        run: ./gradlew ktlintFormat
+
+      - name: Run Detekt
+        run: ./gradlew detekt
+
+      - name: Run Unit Tests
+        run: ./gradlew test
+  build:
+    if: ${{ success() }}
+    needs: checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Build
+        run: ./gradlew assamble
+
+
