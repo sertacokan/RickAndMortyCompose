@@ -20,7 +20,6 @@ jobs:
           distribution: 'zulu'
           java-version: '11'
   checks:
-    if: ${{ success() }} # returns true when none of the previous steps have failed or been cancelled.
     needs: setup
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -34,12 +33,9 @@ jobs:
       - name: Run Unit Tests
         run: ./gradlew test
   build:
-    if: ${{ success() }}
     needs: checks
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
       - name: Build
         run: ./gradlew assamble
-
-
