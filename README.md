@@ -4,7 +4,7 @@
 
 Jetpack Compose sample project with [RickAndMorty API](https://rickandmortyapi.com/)
 
-### Libraries
+### Included Libraries and Features
 
 * [Kotlin](https://github.com/JetBrains/kotlin)
 * [Jetpack Compose](https://developer.android.com/jetpack/compose?gclid=Cj0KCQiA47GNBhDrARIsAKfZ2rBiGK_Q8w2vXIGSipnrWA0--Z59KkfXnxs7QBxDJaY2aAreMC-TSAAaAhL5EALw_wcB&gclsrc=aw.ds)
@@ -14,15 +14,15 @@ Jetpack Compose sample project with [RickAndMorty API](https://rickandmortyapi.c
 * [Koin](https://insert-koin.io/)
 * [Coil](https://github.com/coil-kt/coil)
 * [Paging3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)
+* [Github Actions](https://docs.github.com/en/actions)
 * MVVM Architecture
 
 ### TODO
 
-- [x] View all characters in [RickAndMorty API](https://rickandmortyapi.com/)
+- [x] View all characters in from api
 - [ ] Add character filter
 - [ ] List enter and exit animations
-- [x] Paging implementation
-  with [Paging3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)
+- [x] Paging implementation with Paging3
 - [ ] Character detail screen
 - [ ] Add character to favorite
 - [ ] Github Action integration
