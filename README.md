@@ -1,5 +1,7 @@
 # RickAndMortyCompose
 
+[![Github Workflow](https://github.com/sertacokan/RickAndMortyCompose/actions/workflows/github_workflow.yml/badge.svg?branch=master)](https://github.com/sertacokan/RickAndMortyCompose/actions/workflows/github_workflow.yml)
+
 Jetpack Compose sample project with [RickAndMorty API](https://rickandmortyapi.com/)
 
 ### Libraries
