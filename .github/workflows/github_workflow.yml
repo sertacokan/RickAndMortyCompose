@@ -41,7 +41,7 @@ jobs:
         run: ./gradlew test
 
   build:
-    name: Assamble Builds
+    name: Assemble
     needs: checks
     runs-on: ubuntu-latest
     timeout-minutes: 20
