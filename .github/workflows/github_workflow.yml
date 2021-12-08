@@ -9,7 +9,6 @@ on:
 jobs:
   checks:
     name: Lint and Unit Test Runs
-    needs: setup
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
