@@ -15,6 +15,15 @@ jobs:
       - name: Clone Repository
         uses: actions/checkout@v2
 
+      - name: Gradle Cache # 10GB cache limit
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }} # explicit key for restoring and saving the cache
+          restore-keys: ${{ runner.os }}-gradle-
+
       - name: Setup JDK
         uses: actions/setup-java@v2
         with:
