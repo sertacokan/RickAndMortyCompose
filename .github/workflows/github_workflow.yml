@@ -22,8 +22,6 @@ jobs:
           java-version: '11'
           cache: 'gradle'
 
-      - run: ./gradlew build --no-daemon
-
       - name: Run Ktlint
         run: ./gradlew ktlintFormat
 
@@ -32,11 +30,12 @@ jobs:
 
       - name: Run Unit Tests
         run: ./gradlew test
+
   build:
-    name: Assable Builds
+    name: Assamble Builds
     needs: checks
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 20
     steps:
       - name: Clone Repository
         uses: actions/checkout@v2
@@ -49,4 +48,4 @@ jobs:
           cache: 'gradle'
 
       - name: Build
-        run: ./gradlew assamble
+        run: ./gradlew assambleDebug
