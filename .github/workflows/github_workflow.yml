@@ -7,8 +7,9 @@ on:
     branches:
       - master
 jobs:
-  setup:
-    name: Clone and JDK Setup
+  checks:
+    name: Lint and Unit Test Runs
+    needs: setup
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -20,12 +21,10 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '11'
-  checks:
-    name: Lint and Unit Test Runs
-    needs: setup
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    steps:
+          cache: 'gradle'
+
+      - run: ./gradlew build --no-daemon
+
       - name: Run Ktlint
         run: ./gradlew ktlintFormat
 
@@ -40,5 +39,15 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
+      - name: Clone Repository
+        uses: actions/checkout@v2
+
+      - name: Setup JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+          cache: 'gradle'
+
       - name: Build
         run: ./gradlew assamble
