@@ -38,9 +38,9 @@ jobs:
         run: ./gradlew detekt
 
       #- name: Run Unit Tests
-       # run: ./gradlew test
+      # run: ./gradlew test
   build:
-    name: Assemble
+    name: Assemble Debug
     needs: checks
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -56,4 +56,4 @@ jobs:
           cache: 'gradle'
 
       - name: Build
-        run: ./gradlew assambleDebug
+        run: ./gradlew assembleDebug
