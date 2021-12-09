@@ -49,6 +49,13 @@ android {
     }
 }
 
+detekt {
+    buildUponDefaultConfig = true // preconfigure defaults
+    allRules = false // active all rules available(event unstable) rules
+    config = files("$rootDir/detekt/detekt_config.yml")
+    // point to custom config defining rules to run, overwriting default behavior
+}
+
 dependencies {
     api project(":network")
     implementation 'androidx.core:core-ktx:1.7.0'

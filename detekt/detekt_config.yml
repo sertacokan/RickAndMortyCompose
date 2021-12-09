@@ -1,0 +1,25 @@
+complexity:
+  LongParameterList:
+    functionThreshold: 10
+    ignoreDefaultParameters: true
+style:
+  MagicNumber:
+    active: false
+    ignorePropertyDeclaration: true
+  UnusedPrivateMember:
+    ignoreAnnotated: [ 'Preview' ]
+  SerialVersionUIDInSerializableClass:
+    active: false
+  WildcardImport:
+    active: false
+  MaxLineLength:
+    active: false
+naming:
+  FunctionNaming:
+    ignoreAnnotated: [ 'Composable' ]
+exceptions:
+  TooGenericExceptionCaught:
+    active: false
+performance:
+  SpreadOperator:
+    active: false
