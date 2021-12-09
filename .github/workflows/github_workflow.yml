@@ -39,7 +39,6 @@ jobs:
 
       - name: Run Unit Tests
         run: ./gradlew test
-
   build:
     name: Assemble
     needs: checks

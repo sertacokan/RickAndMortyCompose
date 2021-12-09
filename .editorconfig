@@ -1,0 +1,4 @@
+root = true
+
+[*.kt]
+disabled_rules = no-wildcard-imports
