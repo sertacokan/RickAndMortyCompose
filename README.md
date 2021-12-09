@@ -25,7 +25,7 @@ Jetpack Compose sample project with [RickAndMorty API](https://rickandmortyapi.c
 - [x] Paging implementation with Paging3
 - [ ] Character detail screen
 - [ ] Add character to favorite
-- [ ] Github Action integration
+- [x] Github Action integration
 - [ ] Convert gradle to Kotlin
 - [ ] Add unit test
 - [ ] Add jetpack compose ui test
