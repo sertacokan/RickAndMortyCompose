@@ -3,19 +3,16 @@ name: Github Build Workflow
 on:
   workflow_dispatch:
     inputs:
-      type:
-        description: 'Build Type'
+      command:
+        description: 'Build Command'
         required: false
-        default: 'Debug Build'
+        default: assembleDebug
 jobs:
   build:
     name: Assemble Debug
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - name: Build Type Info
-        run: echo "${{ github.event.inputs.type }} started"
-
       - name: Clone Repository
         uses: actions/checkout@v2
 
@@ -27,6 +24,6 @@ jobs:
           cache: 'gradle'
 
       - name: Build
-        run: ./gradlew assembleDebug
+        run: ./gradlew ${{ github.event.inputs.command }}
 
 
