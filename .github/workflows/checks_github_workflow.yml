@@ -1,11 +1,9 @@
-name: Github Workflow
+name: Github Checks Workflow
 on:
   push:
     branches:
       - master
   pull_request:
-    types:
-      - closed
     branches:
       - master
 jobs:
@@ -41,21 +39,3 @@ jobs:
 
       #- name: Run Unit Tests
       # run: ./gradlew test
-  build:
-    name: Assemble Debug
-    needs: checks
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    steps:
-      - name: Clone Repository
-        uses: actions/checkout@v2
-
-      - name: Setup JDK
-        uses: actions/setup-java@v2
-        with:
-          distribution: 'zulu'
-          java-version: '11'
-          cache: 'gradle'
-
-      - name: Build
-        run: ./gradlew assembleDebug
