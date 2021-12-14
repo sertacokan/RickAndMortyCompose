@@ -25,7 +25,7 @@ fun CloseableFilterChip(
     backgroundShape: Shape = MaterialTheme.shapes.small,
     closeIcon: ImageVector = Icons.TwoTone.Close,
     onCloseClicked: (String) -> Unit = {},
-    onSelectionChange: (String) -> Unit = {}
+    onSelectionChange: (String, Boolean) -> Unit = { _, _ -> }
 ) {
     InfoChip(
         modifier = modifier,

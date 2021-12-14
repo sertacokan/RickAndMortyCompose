@@ -19,7 +19,7 @@ import com.google.accompanist.flowlayout.FlowRow
 fun CharacterFilterSection(
     modifier: Modifier = Modifier,
     filterSection: FilterSection,
-    onSectionItemSelected: (String) -> Unit
+    onSectionItemSelected: (String, Boolean) -> Unit
 ) {
     Column(modifier = modifier.padding(8.dp)) {
         Text(
@@ -28,11 +28,11 @@ fun CharacterFilterSection(
         )
         Spacer(modifier = Modifier.height(16.dp))
         FlowRow(mainAxisSpacing = 8.dp) {
-            for (chipText in filterSection.sectionChips) {
+            filterSection.sectionChips.forEach { chipText ->
                 InfoChip(
                     text = chipText,
-                    onSelectionChange = onSectionItemSelected,
-                    backgroundShape = RoundedCornerShape(4.dp)
+                    backgroundShape = RoundedCornerShape(4.dp),
+                    onSelectionChange = onSectionItemSelected
                 )
             }
         }
@@ -51,6 +51,9 @@ enum class FilterSection(@StringRes val sectionTitleRes: Int, val sectionChips: 
 @Preview
 @Composable
 fun CharacterFilterSectionPreview(@PreviewParameter(FilterSectionProvider::class) filterSection: FilterSection) {
-    CharacterFilterSection(filterSection = filterSection, modifier = Modifier.fillMaxWidth()) {
+    CharacterFilterSection(
+        filterSection = filterSection,
+        modifier = Modifier.fillMaxWidth()
+    ) { _, _ ->
     }
 }

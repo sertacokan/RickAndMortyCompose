@@ -25,7 +25,7 @@ fun CharacterFilter(
     modifier: Modifier = Modifier,
     filterState: CharacterFilterState = rememberCharacterFilterState(),
     onFilterExpandClick: (isExpanded: Boolean) -> Unit = {},
-    onFilterChipSelect: (String) -> Unit = {},
+    onFilterChipSelect: (String, Boolean) -> Unit = { _, _ -> },
     onFilterChipClose: (String) -> Unit = {}
 ) {
     Card(modifier = modifier.padding(vertical = 8.dp)) {
@@ -63,7 +63,7 @@ fun CharacterFilterPreview() {
     CharacterFilter(
         filterState = filterState,
         onFilterExpandClick = { isExpanded -> filterState.isExpanded = isExpanded },
-        onFilterChipSelect = { selectedChip -> filterState.addFilter(selectedChip) },
+        onFilterChipSelect = { selectedChip, _ -> filterState.addFilter(selectedChip) },
         onFilterChipClose = { closedChipText ->
             filterState.removeFilter(closedChipText)
         }

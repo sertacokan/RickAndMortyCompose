@@ -48,9 +48,8 @@ class MainActivity : ComponentActivity() {
                     characterId = characterId,
                     onBackPress = {
                         navController.popBackStack()
-                    }, onFavoriteClick = { character ->
-                    println(character)
-                }
+                    }, onFavoriteClick = {
+                    }
                 )
             }
         }

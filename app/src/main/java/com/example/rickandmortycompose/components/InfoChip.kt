@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Surface
@@ -48,13 +49,15 @@ fun InfoChip(
     isClosable: Boolean = false,
     closeIcon: ImageVector = Icons.Outlined.Close,
     onCloseClicked: (String) -> Unit = {},
-    onSelectionChange: (String) -> Unit = {}
+    onSelectionChange: (String, Boolean) -> Unit = { _, _ -> }
 ) {
     val backgroundColor by animateColorAsState(targetValue = if (isSelected) selectedBackgroundColor else unselectedBackgroundColor)
     Surface(
         modifier = modifier
             .wrapContentSize()
-            .clickable { onSelectionChange(text) },
+            .toggleable(isSelected) { isToggled ->
+                onSelectionChange(text, isToggled)
+            },
         elevation = 8.dp,
         shape = backgroundShape,
         color = backgroundColor,
@@ -92,39 +95,57 @@ fun InfoChip(
 
 @Preview
 @Composable
-fun InfoChipWithIconPreview(@PreviewParameter(CharacterProvider::class, limit = 1) character: Character) {
+fun InfoChipWithIconPreview(
+    @PreviewParameter(
+        CharacterProvider::class,
+        limit = 1
+    ) character: Character
+) {
     val isSelected = remember { mutableStateOf(false) }
     InfoChip(
         text = character.species,
         leadIcon = Icons.Outlined.LocalHospital,
         isSelected = isSelected.value,
-        onSelectionChange = { _ ->
+        onSelectionChange = { _, selected ->
+            isSelected.value = selected
         }
     )
 }
 
 @Preview
 @Composable
-fun ClosableInfoChipWithIconPreview(@PreviewParameter(CharacterProvider::class, limit = 1) character: Character) {
+fun ClosableInfoChipWithIconPreview(
+    @PreviewParameter(
+        CharacterProvider::class,
+        limit = 1
+    ) character: Character
+) {
     val isSelected = remember { mutableStateOf(false) }
     InfoChip(
         text = character.species,
         leadIcon = Icons.Outlined.LocalHospital,
         isSelected = isSelected.value,
         isClosable = true,
-        onSelectionChange = { _ ->
+        onSelectionChange = { _, selected ->
+            isSelected.value = selected
         }
     )
 }
 
 @Preview
 @Composable
-fun InfoChipWithoutIconPreview(@PreviewParameter(CharacterProvider::class, limit = 1) character: Character) {
+fun InfoChipWithoutIconPreview(
+    @PreviewParameter(
+        CharacterProvider::class,
+        limit = 1
+    ) character: Character
+) {
     val isSelected = remember { mutableStateOf(false) }
     InfoChip(
         text = character.species,
         isSelected = isSelected.value,
-        onSelectionChange = { _ ->
+        onSelectionChange = { _, selected ->
+            isSelected.value = selected
         }
     )
 }
