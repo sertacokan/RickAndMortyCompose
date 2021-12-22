@@ -1,7 +1,7 @@
-package com.example.rickandmortycompose.network
+package com.example.network
 
-import com.example.rickandmortycompose.network.response.Character
-import com.example.rickandmortycompose.network.response.CharacterResponse
+import com.example.network.response.Character
+import com.example.network.response.CharacterResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

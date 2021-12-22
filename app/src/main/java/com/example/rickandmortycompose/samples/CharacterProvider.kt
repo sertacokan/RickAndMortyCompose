@@ -1,9 +1,9 @@
 package com.example.rickandmortycompose.samples
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import com.example.rickandmortycompose.network.response.Character
-import com.example.rickandmortycompose.network.response.Gender
-import com.example.rickandmortycompose.network.response.Status
+import com.example.network.response.Character
+import com.example.network.response.Gender
+import com.example.network.response.Status
 
 class CharacterProvider : PreviewParameterProvider<Character> {
 

@@ -1,6 +1,7 @@
 package com.example.rickandmortycompose
 
 import android.app.Application
+import com.example.di.networkModule
 import com.example.rickandmortycompose.di.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -13,7 +14,6 @@ class RickAndMortyComposeApp : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@RickAndMortyComposeApp)
-            androidLogger(Level.DEBUG)
             modules(networkModule, viewModelModule, testModule, repositoryModule, pagingModule)
         }
     }

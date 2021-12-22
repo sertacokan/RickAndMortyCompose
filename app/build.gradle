@@ -57,7 +57,7 @@ detekt {
 }
 
 dependencies {
-    api project(":network")
+    api project(path: ':network')
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.4.0'
@@ -76,14 +76,6 @@ dependencies {
     // Lifecycle
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0'
 
-    // Retrofit
-    def retrofit_version = '2.9.0'
-    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
-
-    //Logging Interceptor
-    implementation("com.squareup.okhttp3:logging-interceptor:4.9.2")
-
     // Koin
     def koin_version = "3.1.2"
     implementation "io.insert-koin:koin-android:$koin_version"
@@ -92,11 +84,6 @@ dependencies {
 
     // Coil
     implementation("io.coil-kt:coil-compose:1.4.0")
-
-    // Moshi
-    def moshi_version = '1.12.0'
-    implementation("com.squareup.moshi:moshi:$moshi_version")
-    implementation("com.squareup.moshi:moshi-kotlin:$moshi_version")
 
     //Accompanist
     def accompanist_version = '0.20.0'

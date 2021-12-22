@@ -2,8 +2,8 @@ package com.example.rickandmortycompose.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.rickandmortycompose.network.CharacterRepository
-import com.example.rickandmortycompose.network.response.Character
+import com.example.network.CharacterRepository
+import com.example.network.response.Character
 import java.lang.Exception
 
 class CharacterDataSource(

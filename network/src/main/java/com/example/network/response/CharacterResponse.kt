@@ -1,4 +1,4 @@
-package com.example.rickandmortycompose.network.response
+package com.example.network.response
 
 data class CharacterResponse(
     val info: ResponseInfo,
