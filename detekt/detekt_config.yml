@@ -2,6 +2,8 @@ complexity:
   LongParameterList:
     functionThreshold: 10
     ignoreDefaultParameters: true
+  LongMethod:
+    threshold : 100
 style:
   MagicNumber:
     active: false

@@ -8,14 +8,14 @@ import androidx.compose.material.icons.outlined.ArrowBackIos
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
-import com.example.network.response.Character
-import com.example.network.response.Gender
-import com.example.network.response.Status
+import com.example.database.character.CharacterEntity
 import com.example.rickandmortycompose.R
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
@@ -24,19 +24,17 @@ import org.koin.core.parameter.parametersOf
 fun CharacterDetailScreen(
     characterId: Int,
     onBackPress: () -> Unit = {},
-    onFavoriteClick: (Character?) -> Unit = {}
+    onFavoriteClick: (CharacterEntity?) -> Unit = {}
 ) {
     val characterDetailViewModel: CharacterDetailViewModel = getViewModel {
         parametersOf(characterId)
     }
-    val character = Character(
-        0, "", "", Status.Alive, "", "", Gender.Male, ""
-    )
+    val characterEntity by characterDetailViewModel.characterInfo.collectAsState(initial = null)
 
     Scaffold(
         topBar = {
             CharacterDetailFavoriteTopAppBar(
-                characterInfo = character ,
+                characterInfo = characterEntity,
                 onBackPress = onBackPress,
                 onFavoriteClick = onFavoriteClick
             )
@@ -53,11 +51,11 @@ fun CharacterDetailScreen(
                     .fillMaxWidth()
                     .aspectRatio(1f)
                     .padding(4.dp),
-                painter = rememberImagePainter(data = character.imageUrl),
+                painter = rememberImagePainter(data = characterEntity?.imageUrl),
                 contentDescription = stringResource(id = R.string.character_image_content_description)
             )
             Text(
-                text = character.name,
+                text = characterEntity?.name.orEmpty(),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(4.dp)
@@ -68,10 +66,10 @@ fun CharacterDetailScreen(
 
 @Composable
 private fun CharacterDetailFavoriteTopAppBar(
-    characterInfo: Character?,
+    characterInfo: CharacterEntity?,
     isFavorite: Boolean = false,
     onBackPress: () -> Unit = {},
-    onFavoriteClick: (Character?) -> Unit = {}
+    onFavoriteClick: (CharacterEntity?) -> Unit = {}
 ) {
     val favoriteIcon = if (isFavorite) Icons.Outlined.Favorite else Icons.Outlined.FavoriteBorder
 

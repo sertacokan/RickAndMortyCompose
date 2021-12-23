@@ -11,7 +11,7 @@ interface CharacterDao {
     fun getCharacters(): PagingSource<Int, CharacterEntity>
 
     @Query("SELECT * FROM characters WHERE character_id = :characterId")
-    fun getCharacterById(characterId: Int): CharacterEntity
+    fun getCharacterById(characterId: Int): Flow<CharacterEntity>
 
     @Query("SELECT * FROM characters WHERE character_gender = :gender")
     fun filterCharacterByGender(gender: String): PagingSource<Int, CharacterEntity>

@@ -3,6 +3,7 @@ package com.example.database.repository
 import androidx.paging.PagingSource
 import com.example.database.character.CharacterDao
 import com.example.database.character.CharacterEntity
+import kotlinx.coroutines.flow.Flow
 
 class CharacterRepository(private val characterDao: CharacterDao) {
 
@@ -10,7 +11,7 @@ class CharacterRepository(private val characterDao: CharacterDao) {
         return characterDao.getCharacters()
     }
 
-    fun getCharacterById(characterId: Int): CharacterEntity {
+    fun getCharacterById(characterId: Int): Flow<CharacterEntity> {
         return characterDao.getCharacterById(characterId = characterId)
     }
 
