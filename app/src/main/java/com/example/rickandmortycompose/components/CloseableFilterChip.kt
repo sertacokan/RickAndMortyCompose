@@ -10,32 +10,31 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
+import com.example.rickandmortycompose.characterfilter.Filter
 
 @Composable
 fun CloseableFilterChip(
     modifier: Modifier = Modifier,
-    text: String,
+    filter: Filter,
     leadIcon: ImageVector? = null,
     unselectedBackgroundColor: Color = Color.White,
     selectedBackgroundColor: Color = Color.LightGray,
     contentColor: Color = Color.Black,
     textSize: TextUnit = 12.sp,
-    isSelected: Boolean = false,
     textColor: Color = Color.DarkGray,
     backgroundShape: Shape = MaterialTheme.shapes.small,
     closeIcon: ImageVector = Icons.TwoTone.Close,
-    onCloseClicked: (String) -> Unit = {},
-    onSelectionChange: (String, Boolean) -> Unit = { _, _ -> }
+    onCloseClicked: (Filter) -> Unit = {},
+    onSelectionChange: (Filter, Boolean) -> Unit = { _, _ -> }
 ) {
-    InfoChip(
+    FilterChip(
         modifier = modifier,
-        text = text,
+        filter = filter,
         leadIcon = leadIcon,
         unselectedBackgroundColor = unselectedBackgroundColor,
         selectedBackgroundColor = selectedBackgroundColor,
         contentColor = contentColor,
         textSize = textSize,
-        isSelected = isSelected,
         textColor = textColor,
         backgroundShape = backgroundShape,
         isClosable = true,

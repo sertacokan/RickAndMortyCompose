@@ -1,52 +1,46 @@
 package com.example.rickandmortycompose.samples
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import com.example.network.response.Character
-import com.example.network.response.Gender
-import com.example.network.response.Status
+import com.example.database.character.CharacterEntity
 
-class CharacterProvider : PreviewParameterProvider<Character> {
+class CharacterProvider : PreviewParameterProvider<CharacterEntity> {
 
-    override val values: Sequence<Character> = sequenceOf(
-        Character(
+    override val values: Sequence<CharacterEntity> = sequenceOf(
+        CharacterEntity(
             id = 1,
             name = "Rick Sanchez",
             imageUrl = "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-            status = Status.Alive,
-            species = "Human",
+            status = "Alive",
+            specy = "Human",
             type = "",
-            gender = Gender.Male,
-            url = "https://rickandmortyapi.com/api/character/1"
+            gender = "Male"
         ),
-        Character(
+        CharacterEntity(
             id = 3,
             name = "Summer Smith",
             imageUrl = "https://rickandmortyapi.com/api/character/avatar/3.jpeg",
-            status = Status.Alive,
-            species = "Human",
+            status = "Alive",
+            specy = "Human",
             type = "",
-            gender = Gender.Female,
-            url = "https://rickandmortyapi.com/api/character/3"
+            gender = "Female"
         ),
-        Character(
+        CharacterEntity(
             id = 6,
             name = "Abadango Cluster Princess",
             imageUrl = "https://rickandmortyapi.com/api/character/avatar/6.jpeg",
-            status = Status.Unknown,
-            species = "Alien",
+            status = "Unknown",
+            specy = "Alien",
             type = "",
-            gender = Gender.Female,
-            url = "https://rickandmortyapi.com/api/character/6"
+            gender = "Female"
         ),
-        Character(
+        CharacterEntity(
             id = 7,
             name = "Abradolf Lincler",
             imageUrl = "https://rickandmortyapi.com/api/character/avatar/7.jpeg",
-            status = Status.Unknown,
-            species = "Human",
+            status = "Unknown",
+            specy = "Human",
             type = "Genetic experiment",
-            gender = Gender.Male,
-            url = "https://rickandmortyapi.com/api/character/7"
+            gender = "Male"
         )
     )
 

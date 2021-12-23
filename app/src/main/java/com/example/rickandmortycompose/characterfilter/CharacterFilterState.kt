@@ -7,7 +7,7 @@ import java.io.Serializable
 @Stable
 class CharacterFilterState(
     isExpanded: Boolean = false,
-    sectionItems: Array<String> = emptyArray()
+    sectionItems: Array<Filter> = emptyArray()
 ) : Serializable {
     private var _selectedFilters = mutableStateListOf(*sectionItems)
     private var _isExpanded by mutableStateOf(isExpanded)
@@ -20,11 +20,11 @@ class CharacterFilterState(
 
     val selectedFilter = _selectedFilters
 
-    fun removeFilter(filter: String) {
+    fun removeFilter(filter: Filter) {
         _selectedFilters.remove(filter)
     }
 
-    fun addFilter(filter: String) {
+    fun addFilter(filter: Filter) {
         _selectedFilters.add(filter)
     }
 }
@@ -32,7 +32,7 @@ class CharacterFilterState(
 @Composable
 fun rememberCharacterFilterState(
     isExpanded: Boolean = false,
-    sectionItems: Array<String> = emptyArray()
+    sectionItems: Array<Filter> = emptyArray()
 ): CharacterFilterState {
     return rememberSaveable {
         CharacterFilterState(isExpanded = isExpanded, sectionItems = sectionItems)

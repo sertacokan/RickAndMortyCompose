@@ -8,3 +8,5 @@ dependencyResolutionManagement {
 rootProject.name = "RickAndMortyCompose"
 include ':app'
 include ':network'
+include ':database'
+include ':paging'

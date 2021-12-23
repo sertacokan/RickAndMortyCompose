@@ -3,11 +3,13 @@ package com.example.rickandmortycompose.characterlist
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -21,10 +23,9 @@ import androidx.compose.ui.unit.sp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import coil.transform.RoundedCornersTransformation
+import com.example.database.character.CharacterEntity
 import com.example.rickandmortycompose.R
 import com.example.rickandmortycompose.components.InfoChip
-import com.example.rickandmortycompose.network.response.Character
-import com.example.rickandmortycompose.network.response.Status
 import com.example.rickandmortycompose.samples.CharacterProvider
 import com.example.rickandmortycompose.ui.theme.RickAndMortyComposeTheme
 import com.google.accompanist.flowlayout.FlowRow
@@ -33,11 +34,11 @@ import com.google.accompanist.flowlayout.FlowRow
 @Composable
 fun CharacterListItem(
     modifier: Modifier = Modifier,
-    character: Character,
-    onCharacterItemClicked: (Character) -> Unit
+    character: CharacterEntity,
+    onCharacterItemClicked: (CharacterEntity) -> Unit
 ) {
     val backgroundColor = when (character.status) {
-        Status.Dead -> Color.Red
+        "Dead" -> Color.Red
         else -> Color.LightGray
     }
 
@@ -61,10 +62,10 @@ fun CharacterListItem(
                     mainAxisSpacing = 4.dp
                 ) {
                     if (character.type.isNotBlank()) {
-                        InfoChip(text = character.type)
+                        InfoChip(infoText = character.type)
                     }
-                    InfoChip(text = character.species)
-                    InfoChip(text = character.gender.name)
+                    InfoChip(infoText = character.specy)
+                    InfoChip(infoText = character.gender)
                 }
             }
             Spacer(modifier = Modifier.width(2.dp))
@@ -74,19 +75,21 @@ fun CharacterListItem(
                     .aspectRatio(1f)
             ) {
                 Image(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clip(CircleShape),
                     painter = rememberImagePainter(data = character.imageUrl, builder = {
                         transformations(RoundedCornersTransformation(8f))
                     }),
                     contentDescription = stringResource(id = R.string.character_image_content_description),
-                    contentScale = ContentScale.FillBounds
+                    contentScale = ContentScale.FillBounds,
                 )
                 if (!character.isAlive) {
                     Text(
                         modifier = Modifier
                             .rotate(45f)
                             .align(Alignment.Center),
-                        text = character.status.name,
+                        text = character.status,
                         color = backgroundColor,
                         textAlign = TextAlign.Center,
                     )
@@ -98,7 +101,7 @@ fun CharacterListItem(
 
 @Preview
 @Composable
-fun CharacterListItemPreview(@PreviewParameter(CharacterProvider::class) character: Character) {
+fun CharacterListItemPreview(@PreviewParameter(CharacterProvider::class) character: CharacterEntity) {
     RickAndMortyComposeTheme {
         CharacterListItem(character = character, onCharacterItemClicked = {})
     }

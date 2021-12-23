@@ -10,9 +10,7 @@ interface CharacterService {
 
     @GET("character/")
     suspend fun fetchCharacterList(
-        @Query("page") pageNumber: Int,
-        @Query("status") status: String?,
-        @Query("gender") gender: String?
+        @Query("page") pageNumber: Int
     ): CharacterResponse
 
     @GET("character/{characterId}")

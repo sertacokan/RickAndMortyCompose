@@ -1,6 +1,5 @@
 package com.example.rickandmortycompose.components
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
@@ -11,7 +10,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import com.example.rickandmortycompose.R
+import com.example.rickandmortycompose.characterfilter.Filter
+import com.example.rickandmortycompose.characterfilter.FilterSection
 import com.example.rickandmortycompose.samples.FilterSectionProvider
 import com.google.accompanist.flowlayout.FlowRow
 
@@ -19,18 +19,18 @@ import com.google.accompanist.flowlayout.FlowRow
 fun CharacterFilterSection(
     modifier: Modifier = Modifier,
     filterSection: FilterSection,
-    onSectionItemSelected: (String, Boolean) -> Unit
+    onSectionItemSelected: (Filter, Boolean) -> Unit
 ) {
     Column(modifier = modifier.padding(8.dp)) {
         Text(
-            text = stringResource(id = filterSection.sectionTitleRes),
+            text = stringResource(id = filterSection.sectionTitle),
             fontWeight = FontWeight.Bold
         )
         Spacer(modifier = Modifier.height(16.dp))
         FlowRow(mainAxisSpacing = 8.dp) {
-            filterSection.sectionChips.forEach { chipText ->
-                InfoChip(
-                    text = chipText,
+            filterSection.filters.forEach { filter ->
+                FilterChip(
+                    filter = filter,
                     backgroundShape = RoundedCornerShape(4.dp),
                     onSelectionChange = onSectionItemSelected
                 )
@@ -39,14 +39,6 @@ fun CharacterFilterSection(
     }
 }
 
-enum class FilterSection(@StringRes val sectionTitleRes: Int, val sectionChips: List<String>) {
-    GENDER(R.string.character_gender_title, listOf("Female", "Male", "Genderless", "Unknown")),
-    STATUS(R.string.character_status_title, listOf("Alive", "Dead", "Unknown"));
-
-    companion object {
-        val sections = values()
-    }
-}
 
 @Preview
 @Composable

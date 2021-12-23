@@ -25,8 +25,8 @@ fun CharacterFilter(
     modifier: Modifier = Modifier,
     filterState: CharacterFilterState = rememberCharacterFilterState(),
     onFilterExpandClick: (isExpanded: Boolean) -> Unit = {},
-    onFilterChipSelect: (String, Boolean) -> Unit = { _, _ -> },
-    onFilterChipClose: (String) -> Unit = {}
+    onFilterChipSelect: (Filter, Boolean) -> Unit = { _, _ -> },
+    onFilterChipClose: (Filter) -> Unit = {}
 ) {
     Card(modifier = modifier.padding(vertical = 8.dp)) {
         Column {
@@ -38,8 +38,8 @@ fun CharacterFilter(
                     mainAxisSpacing = 4.dp,
                     crossAxisSpacing = 4.dp
                 ) {
-                    filterState.selectedFilter.forEach { filterText ->
-                        CloseableFilterChip(text = filterText, onCloseClicked = onFilterChipClose)
+                    filterState.selectedFilter.forEach { filter ->
+                        CloseableFilterChip(filter = filter, onCloseClicked = onFilterChipClose)
                     }
                 }
                 IconButton(onClick = { onFilterExpandClick(!filterState.isExpanded) }) {
@@ -49,7 +49,8 @@ fun CharacterFilter(
             AnimatedVisibility(visible = filterState.isExpanded) {
                 CharacterFilterSectionColumn(
                     modifier = Modifier.fillMaxWidth(),
-                    onSectionChipChange = onFilterChipSelect
+                    onSectionChipChange = onFilterChipSelect,
+                    sections = listOf()
                 )
             }
         }

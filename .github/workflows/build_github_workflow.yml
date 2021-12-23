@@ -33,7 +33,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/download-artifact@v2
         with:
-          name: app
+          name: app.apk
           path: app/build/outputs/apk/${{ github.event.inputs.flavor }}/app-${{ github.event.inputs.flavor }}.apk
 
 

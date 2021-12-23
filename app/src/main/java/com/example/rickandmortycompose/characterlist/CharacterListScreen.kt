@@ -7,19 +7,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
+import com.example.database.character.CharacterEntity
 import com.example.rickandmortycompose.characterfilter.CharacterFilter
 import com.example.rickandmortycompose.characterfilter.rememberCharacterFilterState
-import com.example.rickandmortycompose.network.response.Character
 import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun CharacterListScreen(
     characterListViewModel: CharacterListViewModel = getViewModel(),
-    onCharacterItemClicked: (Character) -> Unit
+    onCharacterItemClicked: (CharacterEntity) -> Unit
 ) {
     val characterFilterState = rememberCharacterFilterState()
     val lazyCharacterItems =
-        characterListViewModel.characterListPagingData.collectAsLazyPagingItems()
+        characterListViewModel.characterList.collectAsLazyPagingItems()
 
     Column(
         modifier = Modifier
@@ -39,8 +39,8 @@ fun CharacterListScreen(
             }
         )
         LazyColumn(modifier = Modifier.fillMaxSize()) {
-            items(lazyCharacterItems) { character ->
-                val validCharacter = character ?: return@items
+            items(lazyCharacterItems) { characterEntity ->
+                val validCharacter = characterEntity ?: return@items
                 CharacterListItem(
                     character = validCharacter,
                     onCharacterItemClicked = onCharacterItemClicked
