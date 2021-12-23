@@ -10,7 +10,7 @@ val viewModelModule = module {
         CharacterListViewModel(characterRemoteMediator = get(), characterRepository = get())
     }
     viewModel { (characterId: Int) ->
-        CharacterDetailViewModel(characterId = characterId)
+        CharacterDetailViewModel(characterId = characterId, characterRepository = get())
     }
 }
 
