@@ -52,6 +52,7 @@ fun FilterChip(
     textColor: Color = Color.DarkGray,
     backgroundShape: Shape = RoundedCornerShape(percent = 50),
     isClosable: Boolean = false,
+    isToggleable: Boolean = true,
     closeIcon: ImageVector = Icons.Outlined.Close,
     onCloseClicked: (Filter) -> Unit = {},
     onSelectionChange: (Filter, Boolean) -> Unit = { _, _ -> }
@@ -60,7 +61,7 @@ fun FilterChip(
     Surface(
         modifier = modifier
             .wrapContentSize()
-            .toggleable(isSelected) { isToggled ->
+            .toggleable(value = isSelected, enabled = isToggleable) { isToggled ->
                 onSelectionChange(filter, isToggled)
             }
             .clip(backgroundShape),
