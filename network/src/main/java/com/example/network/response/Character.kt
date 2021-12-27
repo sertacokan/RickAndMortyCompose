@@ -12,9 +12,7 @@ data class Character(
     val type: String,
     val gender: Gender,
     val url: String
-) {
-    val isAlive: Boolean get() = status == Status.Alive
-}
+)
 
 enum class Status {
     Alive,
@@ -28,7 +26,6 @@ enum class Gender {
     Female,
     Male,
 
-    @Json(name = "genderless")
     Genderless,
 
     @Json(name = "unknown")
