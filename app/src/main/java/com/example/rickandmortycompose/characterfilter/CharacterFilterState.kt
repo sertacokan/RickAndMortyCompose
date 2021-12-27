@@ -7,32 +7,36 @@ import java.io.Serializable
 @Stable
 class CharacterFilterState(
     isExpanded: Boolean = false,
-    sectionItems: Array<Filter> = emptyArray()
+    sectionItems: List<Filter> = emptyList()
 ) : Serializable {
-    private var _selectedFilters = mutableStateListOf(*sectionItems)
-    private var _isExpanded by mutableStateOf(isExpanded)
 
-    var isExpanded: Boolean
-        get() = this._isExpanded
-        set(value) {
-            this._isExpanded = value
-        }
+    var selectedFilters by mutableStateOf(sectionItems)
+        private set
 
-    val selectedFilter = _selectedFilters
+    var isExpanded by mutableStateOf(isExpanded)
+        private set
+
+    fun expand() {
+        isExpanded = true
+    }
+
+    fun collapse() {
+        isExpanded = false
+    }
 
     fun removeFilter(filter: Filter) {
-        _selectedFilters.remove(filter)
+        selectedFilters = selectedFilters - filter
     }
 
     fun addFilter(filter: Filter) {
-        _selectedFilters.add(filter)
+        selectedFilters = selectedFilters + filter
     }
 }
 
 @Composable
 fun rememberCharacterFilterState(
     isExpanded: Boolean = false,
-    sectionItems: Array<Filter> = emptyArray()
+    sectionItems: List<Filter> = emptyList()
 ): CharacterFilterState {
     return rememberSaveable {
         CharacterFilterState(isExpanded = isExpanded, sectionItems = sectionItems)

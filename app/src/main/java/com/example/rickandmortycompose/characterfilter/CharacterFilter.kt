@@ -38,7 +38,7 @@ fun CharacterFilter(
                     mainAxisSpacing = 4.dp,
                     crossAxisSpacing = 4.dp
                 ) {
-                    filterState.selectedFilter.forEach { filter ->
+                    filterState.selectedFilters.forEach { filter ->
                         CloseableFilterChip(filter = filter, onCloseClicked = onFilterChipClose)
                     }
                 }
@@ -50,7 +50,7 @@ fun CharacterFilter(
                 CharacterFilterSectionColumn(
                     modifier = Modifier.fillMaxWidth(),
                     onSectionChipChange = onFilterChipSelect,
-                    sections = listOf()
+                    sections = filterSections
                 )
             }
         }
@@ -63,8 +63,16 @@ fun CharacterFilterPreview() {
     val filterState = rememberCharacterFilterState()
     CharacterFilter(
         filterState = filterState,
-        onFilterExpandClick = { isExpanded -> filterState.isExpanded = isExpanded },
-        onFilterChipSelect = { selectedChip, _ -> filterState.addFilter(selectedChip) },
+        onFilterExpandClick = { isExpanded ->
+            if (isExpanded) {
+                filterState.expand()
+            } else {
+                filterState.collapse()
+            }
+        },
+        onFilterChipSelect = { selectedChip, _ ->
+            filterState.addFilter(selectedChip)
+        },
         onFilterChipClose = { closedChipText ->
             filterState.removeFilter(closedChipText)
         }
