@@ -17,7 +17,7 @@ fun CloseableFilterChip(
     modifier: Modifier = Modifier,
     filter: Filter,
     leadIcon: ImageVector? = null,
-    unselectedBackgroundColor: Color = Color.White,
+    unselectedBackgroundColor: Color = MaterialTheme.colors.surface,
     selectedBackgroundColor: Color = Color.LightGray,
     contentColor: Color = Color.Black,
     textSize: TextUnit = 12.sp,

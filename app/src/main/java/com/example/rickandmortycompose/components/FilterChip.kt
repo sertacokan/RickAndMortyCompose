@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -43,7 +44,7 @@ fun FilterChip(
     modifier: Modifier = Modifier,
     filter: Filter,
     leadIcon: ImageVector? = null,
-    unselectedBackgroundColor: Color = Color.White,
+    unselectedBackgroundColor: Color = MaterialTheme.colors.surface,
     selectedBackgroundColor: Color = Color.LightGray,
     contentColor: Color = Color.Black,
     textSize: TextUnit = 12.sp,
