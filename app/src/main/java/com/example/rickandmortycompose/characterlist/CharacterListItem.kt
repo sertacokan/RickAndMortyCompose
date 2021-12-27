@@ -1,10 +1,12 @@
 package com.example.rickandmortycompose.characterlist
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -52,7 +54,7 @@ fun CharacterListItem(
                 Text(
                     modifier = Modifier.fillMaxWidth(),
                     text = character.name,
-                    style = TextStyle(fontSize = 17.sp)
+                    style = TextStyle(fontSize = 17.sp, color = MaterialTheme.colors.onSurface)
                 )
                 FlowRow(
                     modifier = Modifier
@@ -99,9 +101,15 @@ fun CharacterListItem(
     }
 }
 
+@Preview(uiMode = UI_MODE_NIGHT_YES)
 @Preview
 @Composable
-fun CharacterListItemPreview(@PreviewParameter(CharacterProvider::class) character: CharacterEntity) {
+fun CharacterListItemPreview(
+    @PreviewParameter(
+        CharacterProvider::class,
+        limit = 1
+    ) character: CharacterEntity
+) {
     RickAndMortyComposeTheme {
         CharacterListItem(character = character, onCharacterItemClicked = {})
     }

@@ -1,8 +1,10 @@
 package com.example.rickandmortycompose.components
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -13,18 +15,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.rickandmortycompose.ui.theme.RickAndMortyComposeTheme
 
 @Composable
 fun InfoChip(
     modifier: Modifier = Modifier,
-    backgroundColor: Color = Color.White,
     infoText: String
 ) {
     Surface(
         modifier = modifier.wrapContentSize(),
         shape = RoundedCornerShape(50),
-        elevation = 8.dp,
-        color = backgroundColor
+        elevation = 8.dp
     ) {
         Text(
             text = infoText,
@@ -34,8 +35,11 @@ fun InfoChip(
     }
 }
 
+@Preview(uiMode = UI_MODE_NIGHT_YES)
 @Preview
 @Composable
 fun InfoChipPreview() {
-    InfoChip(infoText = "Male")
+    RickAndMortyComposeTheme {
+        InfoChip(infoText = "Male")
+    }
 }
