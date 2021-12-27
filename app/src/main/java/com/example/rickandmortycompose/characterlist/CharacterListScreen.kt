@@ -1,5 +1,6 @@
 package com.example.rickandmortycompose.characterlist
 
+import androidx.compose.animation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.*
@@ -12,6 +13,7 @@ import com.example.rickandmortycompose.characterfilter.CharacterFilter
 import com.example.rickandmortycompose.characterfilter.rememberCharacterFilterState
 import org.koin.androidx.compose.getViewModel
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun CharacterListScreen(
     characterListViewModel: CharacterListViewModel = getViewModel(),
@@ -42,13 +44,23 @@ fun CharacterListScreen(
                 characterFilterState.removeFilter(closedFilter)
             }
         )
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
-            items(lazyCharacterItems) { characterEntity ->
-                val validCharacter = characterEntity ?: return@items
-                CharacterListItem(
-                    character = validCharacter,
-                    onCharacterItemClicked = onCharacterItemClicked
-                )
+        AnimatedVisibility(
+            visible = lazyCharacterItems.itemCount != 0,
+            enter = fadeIn(),
+            exit = fadeOut()
+        ) {
+            LazyColumn(modifier = Modifier.fillMaxSize()) {
+                items(lazyCharacterItems) { characterEntity ->
+                    val validCharacter = characterEntity ?: return@items
+                    CharacterListItem(
+                        character = validCharacter,
+                        onCharacterItemClicked = onCharacterItemClicked,
+                        modifier = Modifier.animateEnterExit(
+                            enter = fadeIn() + slideInVertically(),
+                            exit = fadeOut() + slideOutVertically()
+                        )
+                    )
+                }
             }
         }
     }
