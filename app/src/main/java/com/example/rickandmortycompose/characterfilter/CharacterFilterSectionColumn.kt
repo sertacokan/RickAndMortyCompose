@@ -10,6 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.rickandmortycompose.R
 import com.example.rickandmortycompose.components.CharacterFilterSection
+import com.example.rickandmortycompose.ui.theme.RickAndMortyComposeTheme
 
 // TODO : Change selected chip color
 // TODO : Single selection issue
@@ -34,10 +35,12 @@ fun CharacterFilterSectionColumn(
 @Preview
 @Composable
 fun CharacterFilterSectionColumnPreview() {
-    val filterSections = listOf(
-        FilterSection(R.string.character_gender_title, genderFilters),
-        FilterSection(R.string.character_status_title, statusFilters)
-    )
-    CharacterFilterSectionColumn(sections = filterSections) { _, _ ->
+    RickAndMortyComposeTheme {
+        val filterSections = listOf(
+            FilterSection(R.string.character_gender_title, genderFilters),
+            FilterSection(R.string.character_status_title, statusFilters)
+        )
+        CharacterFilterSectionColumn(sections = filterSections) { _, _ ->
+        }
     }
 }

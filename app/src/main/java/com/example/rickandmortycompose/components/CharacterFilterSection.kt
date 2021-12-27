@@ -1,6 +1,7 @@
 package com.example.rickandmortycompose.components
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -19,6 +20,8 @@ import com.google.accompanist.flowlayout.FlowRow
 fun CharacterFilterSection(
     modifier: Modifier = Modifier,
     filterSection: FilterSection,
+    selectedFilter: Filter? = null,
+    chipBackgroundShape: CornerBasedShape = RoundedCornerShape(4.dp),
     onSectionItemSelected: (Filter, Boolean) -> Unit
 ) {
     Column(modifier = modifier.padding(8.dp)) {
@@ -31,8 +34,9 @@ fun CharacterFilterSection(
             filterSection.filters.forEach { filter ->
                 FilterChip(
                     filter = filter,
-                    backgroundShape = RoundedCornerShape(4.dp),
-                    onSelectionChange = onSectionItemSelected
+                    backgroundShape = chipBackgroundShape,
+                    onSelectionChange = onSectionItemSelected,
+                    isSelected = selectedFilter == filter
                 )
             }
         }

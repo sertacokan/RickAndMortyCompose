@@ -1,5 +1,6 @@
 package com.example.rickandmortycompose.characterfilter
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Column
@@ -17,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.rickandmortycompose.components.CloseableFilterChip
+import com.example.rickandmortycompose.ui.theme.RickAndMortyComposeTheme
 import com.google.accompanist.flowlayout.FlowRow
 
 @OptIn(ExperimentalAnimationApi::class)
@@ -57,24 +59,27 @@ fun CharacterFilter(
     }
 }
 
+@Preview(uiMode = UI_MODE_NIGHT_YES)
 @Preview
 @Composable
 fun CharacterFilterPreview() {
-    val filterState = rememberCharacterFilterState()
-    CharacterFilter(
-        filterState = filterState,
-        onFilterExpandClick = { isExpanded ->
-            if (isExpanded) {
-                filterState.expand()
-            } else {
-                filterState.collapse()
+    RickAndMortyComposeTheme {
+        val filterState = rememberCharacterFilterState()
+        CharacterFilter(
+            filterState = filterState,
+            onFilterExpandClick = { isExpanded ->
+                if (isExpanded) {
+                    filterState.expand()
+                } else {
+                    filterState.collapse()
+                }
+            },
+            onFilterChipSelect = { selectedChip, _ ->
+                filterState.addFilter(selectedChip)
+            },
+            onFilterChipClose = { closedChipText ->
+                filterState.removeFilter(closedChipText)
             }
-        },
-        onFilterChipSelect = { selectedChip, _ ->
-            filterState.addFilter(selectedChip)
-        },
-        onFilterChipClose = { closedChipText ->
-            filterState.removeFilter(closedChipText)
-        }
-    )
+        )
+    }
 }

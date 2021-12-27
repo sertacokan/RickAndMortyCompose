@@ -43,6 +43,7 @@ import com.example.rickandmortycompose.samples.CharacterProvider
 fun FilterChip(
     modifier: Modifier = Modifier,
     filter: Filter,
+    isSelected: Boolean = false,
     leadIcon: ImageVector? = null,
     unselectedBackgroundColor: Color = MaterialTheme.colors.surface,
     selectedBackgroundColor: Color = Color.LightGray,
@@ -55,11 +56,11 @@ fun FilterChip(
     onCloseClicked: (Filter) -> Unit = {},
     onSelectionChange: (Filter, Boolean) -> Unit = { _, _ -> }
 ) {
-    val backgroundColor by animateColorAsState(targetValue = if (filter.isEnabled) selectedBackgroundColor else unselectedBackgroundColor)
+    val backgroundColor by animateColorAsState(targetValue = if (isSelected) selectedBackgroundColor else unselectedBackgroundColor)
     Surface(
         modifier = modifier
             .wrapContentSize()
-            .toggleable(filter.isEnabled) { isToggled ->
+            .toggleable(isSelected) { isToggled ->
                 onSelectionChange(filter, isToggled)
             }
             .clip(backgroundShape),

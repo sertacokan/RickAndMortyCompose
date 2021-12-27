@@ -34,15 +34,12 @@ val filterSections = listOf(
 
 sealed class Filter {
     abstract val name: String
-    abstract val isEnabled: Boolean
 }
 
 data class GenderFilter(
-    override val name: String,
-    override val isEnabled: Boolean = false
+    override val name: String
 ) : Filter()
 
 data class StatusFilter(
-    override val name: String,
-    override val isEnabled: Boolean = false
+    override val name: String
 ) : Filter()
