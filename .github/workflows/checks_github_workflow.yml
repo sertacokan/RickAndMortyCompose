@@ -5,6 +5,8 @@ on:
   pull_request:
     branches:
       - master
+    paths:
+      - '**.md'
 jobs:
   checks:
     name: Lint and Unit Test Runs
