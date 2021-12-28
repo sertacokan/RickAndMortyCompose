@@ -22,7 +22,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -30,14 +29,11 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.rickandmortycompose.characterfilter.Filter
 import com.example.rickandmortycompose.characterfilter.GenderFilter
-import com.example.network.response.Character
-import com.example.rickandmortycompose.samples.CharacterProvider
 
 @Composable
 fun FilterChip(
@@ -102,12 +98,7 @@ fun FilterChip(
 
 @Preview
 @Composable
-fun InfoChipWithIconPreview(
-    @PreviewParameter(
-        CharacterProvider::class,
-        limit = 1
-    ) character: Character
-) {
+fun InfoChipWithIconPreview() {
     val isSelected = remember { mutableStateOf(false) }
     val genderFilter = GenderFilter("Female")
     FilterChip(
@@ -121,12 +112,7 @@ fun InfoChipWithIconPreview(
 
 @Preview
 @Composable
-fun ClosableInfoChipWithIconPreview(
-    @PreviewParameter(
-        CharacterProvider::class,
-        limit = 1
-    ) character: Character
-) {
+fun ClosableInfoChipWithIconPreview() {
     val isSelected = remember { mutableStateOf(false) }
     val genderFilter = GenderFilter("Female")
 
@@ -142,12 +128,7 @@ fun ClosableInfoChipWithIconPreview(
 
 @Preview
 @Composable
-fun InfoChipWithoutIconPreview(
-    @PreviewParameter(
-        CharacterProvider::class,
-        limit = 1
-    ) character: Character
-) {
+fun InfoChipWithoutIconPreview() {
     val isSelected = remember { mutableStateOf(false) }
     val genderFilter = GenderFilter("Female")
 

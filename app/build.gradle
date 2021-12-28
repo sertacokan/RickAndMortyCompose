@@ -98,6 +98,9 @@ dependencies {
     //Paging
     implementation("androidx.paging:paging-compose:1.0.0-alpha14")
 
+    // Lottie
+    implementation 'com.airbnb.android:lottie-compose:4.2.2'
+
     //Tests
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
