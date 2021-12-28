@@ -30,3 +30,4 @@ Jetpack Compose sample project with [RickAndMorty API](https://rickandmortyapi.c
 - [ ] Add unit test
 - [ ] Add jetpack compose ui test
 - [x] Add database for offline usage
+- [ ] Convert moshi codegen instead of reflection
