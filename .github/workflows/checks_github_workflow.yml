@@ -8,6 +8,8 @@ on:
     paths-ignore:
       - '**/README.md'
 env:
+  # At the start of each run, Github automatically create a unique GITHUB_TOKEN secret to use in your workflow.
+  # You can use the GITHUB_TOKEN to authenticate in a workflow run.
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
@@ -17,6 +19,7 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: First Interaction Message
+        if: github.event_name == 'pull_request'
         uses: actions/first-interaction@v1
         with:
           repo-token: ${ GITHUB_TOKEN }
