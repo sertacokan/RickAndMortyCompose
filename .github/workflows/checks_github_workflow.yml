@@ -17,14 +17,16 @@ jobs:
     name: Lint and Unit Test Runs
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    env:
+      USER_NAME: ${{ github.actor }}
     steps:
       - name: First Interaction Message
         if: github.event_name == 'pull_request'
         uses: actions/first-interaction@v1
         with:
           repo-token: ${ GITHUB_TOKEN }
-          pr-message: "Thank you for your first contribution ${{ GITHUB_ACTOR }}"
-          issue-message: "Thank you for your first issue ${{ GITHUB_ACTOR }}"
+          pr-message: "Thank you for your first contribution ${ USER_NAME }"
+          issue-message: "Thank you for your first issue ${ USER_NAME }"
 
       - name: Clone Repository
         uses: actions/checkout@v2
