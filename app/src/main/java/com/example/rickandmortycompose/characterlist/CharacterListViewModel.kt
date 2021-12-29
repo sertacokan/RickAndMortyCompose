@@ -25,7 +25,11 @@ class CharacterListViewModel(
     private val characterGender = MutableStateFlow("")
 
     val characterList = Pager(
-        config = PagingConfig(pageSize = 20),
+        config = PagingConfig(
+            pageSize = PAGE_SIZE,
+            prefetchDistance = PREFETCH_DISTANCE,
+            initialLoadSize = INITIAL_LOAD_SIZE
+        ),
         remoteMediator = characterRemoteMediator
     ) {
         characterRepository.getCharacters()
@@ -44,5 +48,11 @@ class CharacterListViewModel(
 
     private fun updateCharacterGenderFilter(genderFilter: GenderFilter) {
         characterGender.value = genderFilter.name.lowercase(Locale.getDefault())
+    }
+
+    companion object {
+        private const val PAGE_SIZE = 20
+        private const val INITIAL_LOAD_SIZE = 50
+        private const val PREFETCH_DISTANCE = 1
     }
 }
