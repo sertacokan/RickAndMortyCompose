@@ -21,6 +21,14 @@ class CharacterRemoteMediator(
     private val remoteKeyDao = characterDatabase.remoteKeyDao()
     private val characterDao = characterDatabase.characterDao()
 
+    /*
+        This method checks whether cached data is out of the date and decide whether to trigger a remote refresh.
+        This method runs before any loading is performed.
+        In cases where the local data doesn't need to be refreshed, initialize should return InitializeAction.SKIP_INITIAL_REFRESH.This causes RemoteMediator to skip
+        the remote refresh and load the cached data.
+     */
+    override suspend fun initialize() = InitializeAction.SKIP_INITIAL_REFRESH
+
     override suspend fun load(
         loadType: LoadType,
         state: PagingState<Int, CharacterEntity>
