@@ -1,0 +1,52 @@
+name: Pull Request Workflow
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+      - '**/README.md'
+jobs:
+  pull_request:
+    name: Pull Request Checks
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java_version: [ 11, 14 ]
+    steps:
+      - name: First Interaction Message
+        uses: actions/first-interaction@v1
+        with:
+          repo-token: ${ GITHUB_TOKEN }
+          pr-message: "Thank you for your first contribution ${ USER_NAME }"
+
+      - name: Clone Repository
+        uses: actions/checkout@v2
+
+      - name: Gradle Cache # 10GB cache limit
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }} # explicit key for restoring and saving the cache
+          restore-keys: ${{ runner.os }}-gradle-
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: ${{ matrix.java_version }}
+          cache: 'gradle'
+
+      - name: Run Android Lint
+        run: ./gradlew lint
+
+      - name: Run Ktlint
+        run: ./gradlew ktlintFormat
+
+      - name: Run Detekt
+        run: ./gradlew detekt
+
+      #- name: Run Unit Tests
+      # run: ./gradlew test
