@@ -1,16 +1,12 @@
-name: Github Checks Workflow
+name: Pull Request Checks
 
 on:
-  push:
-    branches:
-      - master
-    paths-ignore:
-      - '**/README.md'
   pull_request:
     branches:
       - master
     paths-ignore:
       - '**/README.md'
+
 env:
   # At the start of each run, Github automatically create a unique GITHUB_TOKEN secret to use in your workflow.
   # You can use the GITHUB_TOKEN to authenticate in a workflow run.
@@ -18,19 +14,30 @@ env:
 
 jobs:
   checks:
-    name: Lint and Unit Test Runs
+    name: Pull Request Lint and Unit Test
     runs-on: ubuntu-latest
     timeout-minutes: 20
-    env:
-      USER_NAME: ${{ github.actor }}
     steps:
       - name: Clone Repository
         uses: actions/checkout@v2
 
-      - name: Gradle Cache # 10GB cache limit
+      - name: First Interaction Message
+        uses: actions/first-interaction@v1
+        env:
+          USER_NAME: ${{ github.actor }}
+        with:
+          repo-token: ${ GITHUB_TOKEN }
+          pr-message: 'Thank you for your first contribution ${ USER_NAME }'
+
+      - name: Cancel Previous Workflow Runs
+        uses: n1hility/cancel-previous-runs@v2.0
+        with:
+          token: ${ GITHUB_TOKEN }
+
+      - name: Cache # 10GB cache limit
         uses: actions/cache@v2
         env:
-          OS_ENV: ${{ runner.os }}
+          OS_NAME: ${{ runner.os }}
         with:
           path: |
             ~/.gradle/caches
@@ -38,8 +45,7 @@ jobs:
           key: ${OS_ENV}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }} # explicit key for restoring and saving the cache
           restore-keys: ${OS_ENV}-gradle-
 
-      - name: Set up JDK 11
-        uses: actions/setup-java@v2
+      - name: Setup up JDK 11
         with:
           distribution: 'zulu'
           java-version: '11'
@@ -51,19 +57,5 @@ jobs:
       - name: Run Ktlint
         run: ./gradlew ktlintFormat
 
-      - name: Run Detekt
+      - name: Run detekt
         run: ./gradlew detekt
-
-      #- name: Run Unit Tests
-      # run: ./gradlew test
-
-      # Scheduled trigger
-      #
-      #            ┌───────────── minute (0 - 59)
-      #            │ ┌───────────── hour (0 - 23)
-      #            │ │ ┌───────────── day of the month (1 - 31)
-      #            │ │ │ ┌───────────── month (1 - 12 or JAN-DEC)
-      #            │ │ │ │ ┌───────────── day of the week  (0 - 6 or SUN-SAT)
-      #            │ │ │ │ │
-      # schedule:
-      #  - cron:  '* * * * *'
