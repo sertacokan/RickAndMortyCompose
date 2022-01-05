@@ -40,8 +40,12 @@ fun CharacterListScreen(
                     characterFilterState.collapse()
                 }
             },
-            onFilterChipSelect = { appliedFilter, _ ->
-                characterFilterState.addFilter(appliedFilter)
+            onFilterChipSelect = { selectedFilter, isSelected ->
+                if (isSelected) {
+                    characterFilterState.addFilter(selectedFilter)
+                } else {
+                    characterFilterState.removeFilter(selectedFilter)
+                }
             },
             onFilterChipClose = { closedFilter ->
                 characterFilterState.removeFilter(closedFilter)
