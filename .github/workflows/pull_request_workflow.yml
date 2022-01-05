@@ -46,6 +46,7 @@ jobs:
           restore-keys: ${OS_ENV}-gradle-
 
       - name: Setup up JDK 11
+        uses: actions/setup-java@v2
         with:
           distribution: 'zulu'
           java-version: '11'
