@@ -1,6 +1,8 @@
 # RickAndMortyCompose
 
-[![Github Checks Workflow](https://github.com/sertacokan/RickAndMortyCompose/actions/workflows/checks_github_workflow.yml/badge.svg)](https://github.com/sertacokan/RickAndMortyCompose/actions/workflows/checks_github_workflow.yml)
+[![Master Push Checks](https://github.com/sertacokan/RickAndMortyCompose/actions/workflows/master_push_workflow.yml/badge.svg?branch=master&event=push)](https://github.com/sertacokan/RickAndMortyCompose/actions/workflows/master_push_workflow.yml)
+[![Pull Request Checks](https://github.com/sertacokan/RickAndMortyCompose/actions/workflows/pull_request_workflow.yml/badge.svg?branch=master&event=pull_request)](https://github.com/sertacokan/RickAndMortyCompose/actions/workflows/pull_request_workflow.yml)
+[![Github Build Workflow](https://github.com/sertacokan/RickAndMortyCompose/actions/workflows/build_github_workflow.yml/badge.svg?branch=master)](https://github.com/sertacokan/RickAndMortyCompose/actions/workflows/build_github_workflow.yml)
 
 Jetpack Compose sample project with [RickAndMorty API](https://rickandmortyapi.com/)
 
