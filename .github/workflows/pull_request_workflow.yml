@@ -18,6 +18,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
+      - name: Cancel Previous Workflow Runs
+        uses: n1hility/cancel-previous-runs@v2.0
+        with:
+          token: ${ GITHUB_TOKEN }
+
       - name: Clone Repository
         uses: actions/checkout@v2
 
@@ -28,11 +33,6 @@ jobs:
         with:
           repo-token: ${ GITHUB_TOKEN }
           pr-message: 'Thank you for your first contribution ${ USER_NAME }'
-
-      - name: Cancel Previous Workflow Runs
-        uses: n1hility/cancel-previous-runs@v2.0
-        with:
-          token: ${ GITHUB_TOKEN }
 
       - name: Cache # 10GB cache limit
         uses: actions/cache@v2

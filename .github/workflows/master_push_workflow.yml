@@ -1,12 +1,7 @@
-name: Github Checks Workflow
+name: Master Push Checks
 
 on:
   push:
-    branches:
-      - master
-    paths-ignore:
-      - '**/README.md'
-  pull_request:
     branches:
       - master
     paths-ignore:
@@ -24,6 +19,11 @@ jobs:
     env:
       USER_NAME: ${{ github.actor }}
     steps:
+      - name: Cancel Previous Workflow Runs
+        uses: n1hility/cancel-previous-runs@v2.0
+        with:
+          token: ${ GITHUB_TOKEN }
+
       - name: Clone Repository
         uses: actions/checkout@v2
 
