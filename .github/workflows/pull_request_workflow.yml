@@ -42,8 +42,8 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: ${OS_ENV}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }} # explicit key for restoring and saving the cache
-          restore-keys: ${OS_ENV}-gradle-
+          key: ${ OS_ENV }-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }} # explicit key for restoring and saving the cache
+          restore-keys: ${ OS_ENV }-gradle-
 
       - name: Setup up JDK 11
         uses: actions/setup-java@v2

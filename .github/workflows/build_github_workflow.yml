@@ -1,16 +1,8 @@
-name: Github Build Workflow
+name: Github Release Build
 
 on:
   workflow_dispatch: # To trigger specific workflow in a repository use workflow_dispatch, to trigger more than one workflow use repository_dispatch
-    inputs:
-      command:
-        description: 'Build Command'
-        required: false
-        default: assembleDebug
-      flavor:
-        description: 'Flavor Type'
-        required: false
-        default: debug
+
 jobs:
   build:
     name: Build Apk
@@ -27,14 +19,14 @@ jobs:
           java-version: '11'
           cache: 'gradle'
 
-      - name: Build
-        run: ./gradlew ${{ github.event.inputs.command }}
+      - name: Build App Bundle
+        run: ./gradlew bundleRelease
 
-      - name: Upload Artifact
+      - name: Upload App Bundle
         uses: actions/upload-artifact@v2
         with:
-          name: app
-          path: app/build/outputs/apk/${{ github.event.inputs.flavor }}/app-${{ github.event.inputs.flavor }}.apk
+          name: release_aab
+          path: app/build/outputs/bundle/release
           retention-days: 5
 
   deploy:
@@ -43,9 +35,8 @@ jobs:
     needs: build
     timeout-minutes: 30
     steps:
-      - name: Download Artifact
+      - name: Download Bundle
         uses: actions/download-artifact@v2
         with:
-          name: app
-          path: app/build/outputs/apk/${{ github.event.inputs.flavor }}/app-${{ github.event.inputs.flavor }}.apk
-
+          name: release_aab
+          path: app/build/outputs/bundle/release
