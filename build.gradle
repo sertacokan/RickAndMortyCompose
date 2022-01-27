@@ -3,7 +3,7 @@ apply from: "$rootDir/dependencies.gradle"
 
 buildscript {
     ext {
-        compose_version = '1.1.0-rc01'
+        compose_version = '1.2.0-alpha02'
         kotlin_version = '1.5.31'
     }
     repositories {
