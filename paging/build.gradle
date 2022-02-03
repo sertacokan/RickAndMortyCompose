@@ -35,10 +35,10 @@ android {
 dependencies {
     api project(path: ":network")
     api project(path: ":database")
-    implementation 'androidx.appcompat:appcompat:1.4.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
 
     // Koin
-    def koin_version = "3.1.2"
+    String koin_version = '3.1.2'
     implementation "io.insert-koin:koin-android:$koin_version"
     implementation "io.insert-koin:koin-androidx-compose:$koin_version"
     testImplementation "io.insert-koin:koin-test:$koin_version"
