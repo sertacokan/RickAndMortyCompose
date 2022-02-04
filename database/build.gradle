@@ -41,7 +41,6 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
 
     // Koin
-    String koin_version = '3.1.2'
     implementation "io.insert-koin:koin-android:$koin_version"
     implementation "io.insert-koin:koin-androidx-compose:$koin_version"
     testImplementation "io.insert-koin:koin-test:$koin_version"
