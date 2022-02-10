@@ -37,7 +37,7 @@ fun CloseableFilterChip(
         textColor = textColor,
         backgroundShape = backgroundShape,
         isClosable = true,
-        isToggleable = false,
+        isSelectable = false,
         closeIcon = closeIcon,
         onCloseClicked = onCloseClicked,
         onSelectionChange = { _, _ -> }

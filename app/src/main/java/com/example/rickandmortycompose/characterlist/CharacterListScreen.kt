@@ -28,8 +28,8 @@ fun CharacterListScreen(
 
     Column(
         modifier = Modifier
-            .fillMaxWidth()
             .padding(8.dp)
+            .fillMaxWidth()
     ) {
         CharacterFilter(
             filterState = characterFilterState,
@@ -51,7 +51,7 @@ fun CharacterListScreen(
                 characterFilterState.removeFilter(closedFilter)
             }
         )
-
+        Spacer(modifier = Modifier.height(8.dp))
         if (isListEmpty) {
             LottieGlootLoading(modifier = Modifier.align(Alignment.CenterHorizontally))
         } else {

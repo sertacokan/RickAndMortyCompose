@@ -29,6 +29,12 @@ class CharacterFilterState(
     }
 
     fun addFilter(filter: Filter) {
+        val filteredList = selectedFilters.filterIsInstance(filter::class.java)
+        val hasDuplicateFilter = filteredList.isNotEmpty()
+        if (hasDuplicateFilter) {
+            val duplicateFilter = filteredList.first()
+            removeFilter(duplicateFilter)
+        }
         selectedFilters = selectedFilters + filter
     }
 }

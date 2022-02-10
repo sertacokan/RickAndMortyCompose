@@ -2,11 +2,7 @@ package com.example.rickandmortycompose.characterfilter
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -21,7 +17,6 @@ import com.example.rickandmortycompose.components.CloseableFilterChip
 import com.example.rickandmortycompose.ui.theme.RickAndMortyComposeTheme
 import com.google.accompanist.flowlayout.FlowRow
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun CharacterFilter(
     modifier: Modifier = Modifier,
@@ -30,13 +25,13 @@ fun CharacterFilter(
     onFilterChipSelect: (Filter, Boolean) -> Unit = { _, _ -> },
     onFilterChipClose: (Filter) -> Unit = {}
 ) {
-    Card(modifier = modifier.padding(vertical = 8.dp)) {
+    Card(modifier = modifier) {
         Column {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 FlowRow(
                     modifier = Modifier
-                        .weight(1f)
-                        .padding(4.dp),
+                        .padding(4.dp)
+                        .weight(1f),
                     mainAxisSpacing = 4.dp,
                     crossAxisSpacing = 4.dp
                 ) {
@@ -49,11 +44,19 @@ fun CharacterFilter(
                 }
             }
             AnimatedVisibility(visible = filterState.isExpanded) {
-                CharacterFilterSectionColumn(
-                    modifier = Modifier.fillMaxWidth(),
-                    onSectionChipChange = onFilterChipSelect,
-                    sections = filterSections
-                )
+                Column(
+                    modifier = modifier,
+                    verticalArrangement = Arrangement.spacedBy(2.dp)
+                ) {
+                    filterSections.forEachIndexed { index, filterSection ->
+                        CharacterFilterSectionColumn(
+                            modifier = Modifier.fillMaxWidth(),
+                            onSectionChipChange = onFilterChipSelect,
+                            section = filterSection,
+                            selectedFilter = filterState.selectedFilters.getOrNull(index)
+                        )
+                    }
+                }
             }
         }
     }
