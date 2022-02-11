@@ -1,12 +1,12 @@
 package com.example.rickandmortycompose.components
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -42,10 +42,10 @@ fun FilterChip(
     isSelected: Boolean = false,
     leadIcon: ImageVector? = null,
     unselectedBackgroundColor: Color = MaterialTheme.colors.surface,
-    selectedBackgroundColor: Color = Color.LightGray,
+    selectedBackgroundColor: Color = Color.Gray,
     contentColor: Color = Color.Black,
     textSize: TextUnit = 12.sp,
-    textColor: Color = Color.DarkGray,
+    textColor: Color = Color.LightGray,
     backgroundShape: Shape = RoundedCornerShape(percent = 50),
     isClosable: Boolean = false,
     isSelectable: Boolean = true,
@@ -54,10 +54,12 @@ fun FilterChip(
     onSelectionChange: (Filter, Boolean) -> Unit = { _, _ -> }
 ) {
     val backgroundColor by animateColorAsState(targetValue = if (isSelected) selectedBackgroundColor else unselectedBackgroundColor)
+    val borderColor by animateColorAsState(targetValue = if (isSelected) unselectedBackgroundColor else selectedBackgroundColor)
     Surface(
         modifier = modifier
             .wrapContentSize()
             .clip(backgroundShape)
+            .border(width = 1.dp, color = borderColor, shape = backgroundShape)
             .clickable(enabled = isSelectable) {
                 onSelectionChange(filter, !isSelected)
             },

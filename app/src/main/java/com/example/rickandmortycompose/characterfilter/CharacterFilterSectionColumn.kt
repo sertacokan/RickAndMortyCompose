@@ -1,11 +1,9 @@
 package com.example.rickandmortycompose.characterfilter
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.rickandmortycompose.R
 import com.example.rickandmortycompose.components.CharacterFilterSection
 import com.example.rickandmortycompose.ui.theme.RickAndMortyComposeTheme
 
